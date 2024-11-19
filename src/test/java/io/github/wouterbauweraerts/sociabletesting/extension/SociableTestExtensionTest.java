@@ -5,29 +5,24 @@ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectMetho
 import static org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder.request;
 
 import org.junit.jupiter.api.Test;
-import org.junit.platform.engine.TestExecutionResult;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
-import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
-import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
-import io.github.wouterbauweraerts.sociabletesting.extension.dummies.SimpleDummy;
+import io.github.wouterbauweraerts.sociabletesting.extension.dummies.MissingTestSubjectTest;
+import io.github.wouterbauweraerts.sociabletesting.extension.dummies.simple.SimpleDummyTest;
 
-@SociableTest
 class SociableTestExtensionTest {
-    @TestSubject
-    SimpleDummy testSubject;
-
     @Test
-    void extensionTest() {
-        assertThat(testSubject).isNotNull();
+    void canInstantiateWithDefaultConstructor() {
+        TestExecutionSummary summary = runTestMethod(SimpleDummyTest.class, "test");
+        assertThat(summary.getTestsSucceededCount()).isEqualTo(1);
     }
 
     @Test
     void startupShouldFailWhenNoTestSubject() {
-        TestExecutionSummary summary = runTestMethod(SociableTestExtensionNoSubjectTest.class, "shouldFail");
+        TestExecutionSummary summary = runTestMethod(MissingTestSubjectTest.class, "shouldFail");
 
         assertThat(summary.getFailures()).hasSize(1)
                 .allSatisfy(failure -> assertThat(failure.getException()).isInstanceOf(UnsupportedOperationException.class)

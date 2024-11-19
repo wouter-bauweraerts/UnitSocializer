@@ -19,6 +19,11 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.11.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.17.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.assertj</groupId>
@@ -50,6 +55,16 @@
                 <configuration>
                     <source>21</source>
                     <target>21</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <excludedGroups>
+                        dummyTest
+                    </excludedGroups>
                 </configuration>
             </plugin>
         </plugins>
