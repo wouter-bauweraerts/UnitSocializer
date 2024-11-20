@@ -1,7 +1,6 @@
 package io.github.wouterbauweraerts.sociabletesting.core.config;
 
 import java.lang.annotation.Annotation;
-import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonRootName;

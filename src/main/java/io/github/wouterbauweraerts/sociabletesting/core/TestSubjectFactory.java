@@ -2,9 +2,7 @@ package io.github.wouterbauweraerts.sociabletesting.core;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Optional;
 
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;

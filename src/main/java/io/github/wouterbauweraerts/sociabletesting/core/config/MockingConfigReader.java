@@ -3,11 +3,9 @@ package io.github.wouterbauweraerts.sociabletesting.core.config;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
 
-import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
