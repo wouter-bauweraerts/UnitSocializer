@@ -1,5 +1,7 @@
 package io.github.wouterbauweraerts.sociabletesting.core;
 
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -15,8 +17,11 @@ public class TestSubjectFactory {
     }
 
     private static <T> boolean shouldMock(Class<T> type) {
-        boolean annotatedWithOneOfAnnotationsToBeMocked = CONFIG.annotations().contains(type.getName());
-        boolean typeShouldBeMocked = CONFIG.classes().contains(type.getName());
+        boolean annotatedWithOneOfAnnotationsToBeMocked = CONFIG.annotations().stream()
+                .anyMatch(a -> Arrays.stream(type.getAnnotations())
+                        .anyMatch(classAnnotation -> classAnnotation.annotationType().equals(a))
+                );
+        boolean typeShouldBeMocked = CONFIG.classes().contains(type);
         boolean packageShouldBeMocked = CONFIG.packages().contains(type.getName());
 
         return annotatedWithOneOfAnnotationsToBeMocked || typeShouldBeMocked || packageShouldBeMocked;
@@ -24,8 +29,7 @@ public class TestSubjectFactory {
 
     public static <T> T instantiate(Class<T> type) throws SociableTestInstantiationException {
         if (shouldMock(type)) {
-            return null;
-//            return mock(type);
+            return mock(type);
         }
 
         Constructor<T> constructor = (Constructor<T>) Arrays.stream(type.getDeclaredConstructors())
