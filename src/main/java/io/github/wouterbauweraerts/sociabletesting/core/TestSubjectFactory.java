@@ -22,7 +22,7 @@ public class TestSubjectFactory {
                         .anyMatch(classAnnotation -> classAnnotation.annotationType().equals(a))
                 );
         boolean typeShouldBeMocked = CONFIG.classes().contains(type);
-        boolean packageShouldBeMocked = CONFIG.packages().contains(type.getName());
+        boolean packageShouldBeMocked = CONFIG.packages().contains(type.getPackageName());
 
         return annotatedWithOneOfAnnotationsToBeMocked || typeShouldBeMocked || packageShouldBeMocked;
     }
