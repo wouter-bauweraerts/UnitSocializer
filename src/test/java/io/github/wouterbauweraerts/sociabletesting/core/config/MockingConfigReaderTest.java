@@ -12,7 +12,7 @@ class MockingConfigReaderTest {
     void readConfigReturnsExpected() {
         MockingConfig mockingConfig = MockingConfigReader.loadConfig();
 
-        assertThat(mockingConfig.packages()).containsExactly("org.springframework.data.jpa.repository");
+        assertThat(mockingConfig.packages()).containsExactly("org.springframework.data.jpa.repository", "io.github.wouterbauweraerts.sociabletesting.mocking.mockpackage");
         assertThat(mockingConfig.annotations()).containsExactly(DummyAnnotation.class);
         assertThat(mockingConfig.classes()).containsExactly(DummyClassToMock.class);
     }
