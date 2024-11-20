@@ -2,7 +2,12 @@ package io.github.wouterbauweraerts.sociabletesting.core;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.Optional;
+
+import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
+import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
 
 public class TestSubjectFactory {
     private static final MockingConfig CONFIG = MockingConfigReader.loadConfig();
@@ -12,12 +17,11 @@ public class TestSubjectFactory {
     }
 
     private static <T> boolean shouldMock(Class<T> type) {
-        // Class is annototated with one of the given types
-        boolean annotatedWithOneOfAnnotationsToBeMocked = CONFIG.annotationsToMock().contains(type.getName());
-        // Class is in types to be mocked
-        boolean typeShouldBeMocked = CONFIG.annotationsToMock().contains(type.getName());
+        boolean annotatedWithOneOfAnnotationsToBeMocked = CONFIG.annotations().contains(type.getName());
+        boolean typeShouldBeMocked = CONFIG.classes().contains(type.getName());
+        boolean packageShouldBeMocked = CONFIG.packages().contains(type.getName());
 
-        return annotatedWithOneOfAnnotationsToBeMocked || typeShouldBeMocked;
+        return annotatedWithOneOfAnnotationsToBeMocked || typeShouldBeMocked || packageShouldBeMocked;
     }
 
     public static <T> T instantiate(Class<T> type) throws SociableTestInstantiationException {
@@ -40,7 +44,7 @@ public class TestSubjectFactory {
                 );
             };
         } catch (Exception e) {
-            throw new SociableTestInstantiationException("Exception occured while instantiating test subject", e);
+            throw new SociableTestInstantiationException("Exception occurred while instantiating test subject", e);
         }
     }
 }

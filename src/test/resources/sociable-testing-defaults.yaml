@@ -3,5 +3,6 @@ sociable-test:
       - "org.springframework.data.jpa.repository"
     classes:
       - "org.springframework.web.client.RestTemplate"
+      - "io.github.wouterbauweraerts.sociabletesting.mocking.DummyClassToMock"
     annotations:
-      - " org.springframework.stereotype.Repository"
+      - "io.github.wouterbauweraerts.sociabletesting.mocking.DummyAnnotation"
