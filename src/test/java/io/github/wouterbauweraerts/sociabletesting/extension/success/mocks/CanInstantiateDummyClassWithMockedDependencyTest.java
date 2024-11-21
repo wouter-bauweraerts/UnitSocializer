@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.success;
+package io.github.wouterbauweraerts.sociabletesting.extension.success.mocks;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mockingDetails;
