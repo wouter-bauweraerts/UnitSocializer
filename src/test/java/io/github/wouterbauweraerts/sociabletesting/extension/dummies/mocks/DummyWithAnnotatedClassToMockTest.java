@@ -15,7 +15,7 @@ import io.github.wouterbauweraerts.sociabletesting.predefined.PredefinedService;
 
 @SociableTest
 class DummyWithAnnotatedClassToMockTest {
-    private static Random RND = new Random();
+    private static final Random RND = new Random();
     @TestSubject
     DummyWithAnnotatedClassToMock subject;
 
