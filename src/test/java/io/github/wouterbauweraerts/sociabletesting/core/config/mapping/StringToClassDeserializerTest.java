@@ -15,7 +15,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonStreamContext;
 import com.fasterxml.jackson.databind.DeserializationContext;
 
-import io.github.wouterbauweraerts.sociabletesting.core.SociableTestInstantiationException;
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.sociabletesting.demo.dummies.mocking.DummyAnnotation;
 

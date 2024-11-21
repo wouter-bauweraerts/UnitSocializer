@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import io.github.wouterbauweraerts.sociabletesting.core.SociableTestInstantiationException;
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.sociabletesting.core.config.mapping.MockingConfigModule;
 
 public class MockingConfigReader {

@@ -1,6 +1,6 @@
-package io.github.wouterbauweraerts.sociabletesting.core;
+package io.github.wouterbauweraerts.sociabletesting.core.exception;
 
-public class SociableTestInstantiationException extends RuntimeException {
+public class SociableTestInstantiationException extends SociableTestException {
     public SociableTestInstantiationException(String message) {
         super(message);
     }

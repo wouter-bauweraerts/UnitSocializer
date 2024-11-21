@@ -13,6 +13,7 @@ import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance
 import io.github.wouterbauweraerts.sociabletesting.annotation.Predefined;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.core.TestSubjectFactory;
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
@@ -51,7 +52,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
     }
 
     private static void addPredefinedFields(ExtensionContext context, List<Field> predefinedFields) {
-        LOGGER.info("Handling @Predefined fields");
+        LOGGER.fine("Handling @Predefined fields");
 
         predefinedFields.forEach(field -> {
             boolean originalAccessibility = field.canAccess(context.getRequiredTestInstance());
@@ -63,7 +64,9 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
                 sociableTestContext.putIfAbsent(predefinedFieldType, predefinedFieldValue);
             } catch (Exception e) {
-// TODO add exception handling
+                LOGGER.severe("Exception occurred while handling @Predefined fields");
+                LOGGER.severe(e.getMessage());
+                throw new SociableTestException("Exception occurred while handling @Predefined fields", e);
             } finally {
                 field.setAccessible(originalAccessibility);
             }
@@ -72,7 +75,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
     }
 
     private static void instantiateObjects(ExtensionContext context, List<Field> testSubjects) {
-        LOGGER.info("Instantiating all @TestSubject annotated fields with their dependencies");
+        LOGGER.fine("Instantiating all @TestSubject annotated fields with their dependencies");
 
         testSubjects.forEach(field -> {
             field.setAccessible(true);
@@ -88,7 +91,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
     }
 
     private static void injectInstances(ExtensionContext context, List<Field> fieldsToInject) {
-        LOGGER.info("Injecting created test instances");
+        LOGGER.fine("Injecting created test instances");
 
         fieldsToInject.forEach(field -> {
             field.setAccessible(true);

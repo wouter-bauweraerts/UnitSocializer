@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 
 public class TestSubjectFactory {
