@@ -9,7 +9,7 @@ import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
 
 @SociableTest
 @Tag("dummyTest")
-public class CanNotStartSociableTestWithoutTestSubjectTest {
+class CanNotStartSociableTestWithoutTestSubjectTest {
     @Test
     void shouldFail() {
         assertThat(true).isTrue();

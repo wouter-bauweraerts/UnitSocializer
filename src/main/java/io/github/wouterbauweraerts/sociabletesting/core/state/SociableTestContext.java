@@ -13,7 +13,7 @@ public class SociableTestContext {
     }
 
     private SociableTestContext() {
-
+        // No need for logic. Add private constructor to hide default constructor
     }
 
     public void clear() {
