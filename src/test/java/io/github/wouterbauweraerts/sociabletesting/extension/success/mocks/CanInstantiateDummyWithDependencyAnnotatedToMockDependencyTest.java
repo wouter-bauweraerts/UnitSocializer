@@ -3,8 +3,6 @@ package io.github.wouterbauweraerts.sociabletesting.extension.success.mocks;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mockingDetails;
 
-import java.util.Random;
-
 import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance;
@@ -14,7 +12,6 @@ import io.github.wouterbauweraerts.sociabletesting.dummies.mocking.DummyAnnotati
 
 @SociableTest
 class CanInstantiateDummyWithDependencyAnnotatedToMockDependencyTest {
-    private static final Random RND = new Random();
     @TestSubject
     DummyWithAnnotatedClassToMock subject;
 
@@ -36,6 +33,6 @@ class CanInstantiateDummyWithDependencyAnnotatedToMockDependencyTest {
     }
 
     @DummyAnnotation
-    public class AnnotatedDummyToMock {
+    public static class AnnotatedDummyToMock {
     }
 }
