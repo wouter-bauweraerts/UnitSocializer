@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
-import io.github.wouterbauweraerts.sociabletesting.demo.dummies.mocking.DummyWithClassFromMockPackage;
+import io.github.wouterbauweraerts.sociabletesting.dummies.mocking.mockpackage.AmazingClass;
 
 @SociableTest
 class CanInstantiateDummyWithClassFromMockPackageTest {
@@ -17,7 +17,10 @@ class CanInstantiateDummyWithClassFromMockPackageTest {
     @Test
     void createsExpected() {
         assertThat(subject).isNotNull();
-        assertThat(subject.getToMock()).isNotNull();
-        assertThat(mockingDetails(subject.getToMock()).isMock()).isTrue();
+        assertThat(subject.toMock()).isNotNull();
+        assertThat(mockingDetails(subject.toMock()).isMock()).isTrue();
+    }
+
+    public record DummyWithClassFromMockPackage(AmazingClass toMock) {
     }
 }

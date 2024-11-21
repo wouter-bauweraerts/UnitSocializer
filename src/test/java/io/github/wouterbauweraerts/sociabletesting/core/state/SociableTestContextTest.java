@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import io.github.wouterbauweraerts.sociabletesting.demo.dummies.SimpleDummy;
+import io.github.wouterbauweraerts.sociabletesting.dummies.SimpleDummy;
 
 class SociableTestContextTest {
     SociableTestContext ctx = SociableTestContext.getInstance();

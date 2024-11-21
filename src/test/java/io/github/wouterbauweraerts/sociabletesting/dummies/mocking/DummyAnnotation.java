@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.demo.dummies.mocking;
+package io.github.wouterbauweraerts.sociabletesting.dummies.mocking;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

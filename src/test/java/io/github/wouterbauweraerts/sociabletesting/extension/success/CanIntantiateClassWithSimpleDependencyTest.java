@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
-import io.github.wouterbauweraerts.sociabletesting.demo.dummies.DummyWithSimpleDependency;
+import io.github.wouterbauweraerts.sociabletesting.dummies.SimpleDummy;
 
 @SociableTest
 class CanIntantiateClassWithSimpleDependencyTest {
@@ -16,6 +16,9 @@ class CanIntantiateClassWithSimpleDependencyTest {
     @Test
     void test() {
         assertThat(dummy).isNotNull();
-        assertThat(dummy.getSimpleDummy()).isNotNull();
+        assertThat(dummy.simpleDummy()).isNotNull();
+    }
+
+    public record DummyWithSimpleDependency(SimpleDummy simpleDummy) {
     }
 }
