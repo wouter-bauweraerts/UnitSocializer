@@ -11,8 +11,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.projectKey>wouter-bauweraerts_sociable-testing</sonar.projectKey>
-        <sonar.organization>wouter-bauweraerts</sonar.organization>
     </properties>
 
     <dependencies>
