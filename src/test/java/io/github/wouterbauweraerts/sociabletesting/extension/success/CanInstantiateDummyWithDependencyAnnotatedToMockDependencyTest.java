@@ -16,7 +16,7 @@ import io.github.wouterbauweraerts.sociabletesting.demo.dummies.annotated.DummyW
 import io.github.wouterbauweraerts.sociabletesting.demo.dummies.predefined.PredefinedService;
 
 @SociableTest
-class CanInstantiateDummyWithDependencyAnnotatedToMockDependency {
+class CanInstantiateDummyWithDependencyAnnotatedToMockDependencyTest {
     private static final Random RND = new Random();
     @TestSubject
     DummyWithAnnotatedClassToMock subject;
