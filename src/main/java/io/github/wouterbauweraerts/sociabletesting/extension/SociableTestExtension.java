@@ -8,11 +8,15 @@ import java.util.logging.Logger;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
+import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.core.TestSubjectFactory;
+import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 
 public class SociableTestExtension implements BeforeEachCallback {
     private static final Logger LOGGER = Logger.getLogger(SociableTestExtension.class.getName());
+    private static final SociableTestContext sociableTestContext = SociableTestContext.getInstance();
+
     @Override
     public void beforeEach(ExtensionContext context) {
         Class<?> testClass = context.getTestClass()
@@ -22,10 +26,19 @@ public class SociableTestExtension implements BeforeEachCallback {
                 .filter(field -> field.isAnnotationPresent(TestSubject.class))
                 .toList();
 
+        List<Field> fieldsToInject = Arrays.stream(testClass.getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(InjectTestInstance.class))
+                .toList();
+
         if (testSubjects.isEmpty()) {
             throw new UnsupportedOperationException("No fields annotated with @TestSubject found!");
         }
 
+        instantiateObjects(context, testSubjects);
+        injectInstances(context, fieldsToInject);
+    }
+
+    private static void instantiateObjects(ExtensionContext context, List<Field> testSubjects) {
         LOGGER.info("Instantiating all @TestSubject annotated fields with their dependencies");
 
         testSubjects.forEach(field -> {
@@ -35,6 +48,22 @@ public class SociableTestExtension implements BeforeEachCallback {
                 field.set(context.getRequiredTestInstance(), TestSubjectFactory.instantiate(field.getType()));
             } catch (Exception e) {
                 throw new IllegalStateException("Unable to create test subject %s".formatted(field.getType().getName()), e);
+            }
+
+            field.setAccessible(false);
+        });
+    }
+
+    private static void injectInstances(ExtensionContext context, List<Field> fieldsToInject) {
+        LOGGER.info("Injecting created test instances");
+
+        fieldsToInject.forEach(field -> {
+            field.setAccessible(true);
+
+            try {
+                field.set(context.getRequiredTestInstance(), sociableTestContext.get(field.getType()));
+            } catch (Exception e) {
+                throw new IllegalStateException("Unable to inject test instance %s".formatted(field.getType().getName()), e);
             }
 
             field.setAccessible(false);

@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
+import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 
 public class TestSubjectFactory {
     private static final MockingConfig CONFIG = MockingConfigReader.loadConfig();
@@ -28,8 +29,16 @@ public class TestSubjectFactory {
     }
 
     public static <T> T instantiate(Class<T> type) throws SociableTestInstantiationException {
+        SociableTestContext instances = SociableTestContext.getInstance();
+
+        if (instances.exists(type)) {
+            return instances.get(type);
+        }
+
         if (shouldMock(type)) {
-            return mock(type);
+            T mock = mock(type);
+            instances.putIfAbsent(type, mock);
+            return mock;
         }
 
         Constructor<T> constructor = (Constructor<T>) Arrays.stream(type.getDeclaredConstructors())
@@ -37,7 +46,7 @@ public class TestSubjectFactory {
                 .orElseThrow(() -> new UnsupportedOperationException("No constructor found"));
 
         try {
-            return switch (constructor.getParameterCount()) {
+            T instance = switch (constructor.getParameterCount()) {
                 case 0 -> constructor.newInstance();
                 default -> constructor.newInstance(
                         Arrays.stream(constructor.getParameterTypes())
@@ -45,6 +54,9 @@ public class TestSubjectFactory {
                             .toArray()
                 );
             };
+
+            instances.putIfAbsent(type, instance);
+            return instance;
         } catch (Exception e) {
             throw new SociableTestInstantiationException("Exception occurred while instantiating test subject", e);
         }
