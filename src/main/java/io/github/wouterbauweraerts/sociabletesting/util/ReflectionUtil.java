@@ -6,14 +6,13 @@ import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestEx
 import io.github.wouterbauweraerts.sociabletesting.extension.SociableTestExtension;
 
 public class ReflectionUtil {
+    private ReflectionUtil() {
+        // Implicitly hide default constructor
+    }
 
-    public static void setField(SociableTestExtension instance, Object value, String fieldName) throws Exception {
+    public static void setField(SociableTestExtension instance, Object value, String fieldName) throws NoSuchFieldException {
         Field field = SociableTestExtension.class.getDeclaredField(fieldName);
-        boolean originalAccessibility = field.canAccess(instance);
-
-        field.setAccessible(true);
-        field.set(instance, value);
-        field.setAccessible(originalAccessibility);
+        setFieldValue(field, instance, value);
     }
 
     public static Object getFieldValue(Field field, Object instance) {
