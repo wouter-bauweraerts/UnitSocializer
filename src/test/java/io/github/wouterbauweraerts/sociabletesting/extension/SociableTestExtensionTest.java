@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Field;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
+import io.github.wouterbauweraerts.sociabletesting.util.ReflectionUtil;
 
 @ExtendWith(MockitoExtension.class)
 class SociableTestExtensionTest {
@@ -35,8 +35,8 @@ class SociableTestExtensionTest {
     void setUp() throws Exception {
         extension = new SociableTestExtension();
 
-        setField(extension, ctx, "sociableTestContext");
-        setField(extension, callbackHandler, "beforeEachCallbackHandler");
+        ReflectionUtil.setField(extension, ctx, "sociableTestContext");
+        ReflectionUtil.setField(extension, callbackHandler, "beforeEachCallbackHandler");
     }
 
     @Test
@@ -77,14 +77,5 @@ class SociableTestExtensionTest {
                 .doesNotThrowAnyException();
 
         verify(callbackHandler).beforeEach(testClass, testInstance);
-    }
-
-    private void setField(SociableTestExtension instance, Object value, String fieldName) throws Exception {
-        Field field = SociableTestExtension.class.getDeclaredField(fieldName);
-        field.setAccessible(true);
-
-        field.set(instance, value);
-
-        field.setAccessible(false);
     }
 }
