@@ -3,16 +3,10 @@ package io.github.wouterbauweraerts.sociabletesting.util;
 import java.lang.reflect.Field;
 
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
-import io.github.wouterbauweraerts.sociabletesting.extension.SociableTestExtension;
 
 public class ReflectionUtil {
     private ReflectionUtil() {
         // Implicitly hide default constructor
-    }
-
-    public static void setField(SociableTestExtension instance, Object value, String fieldName) throws NoSuchFieldException {
-        Field field = SociableTestExtension.class.getDeclaredField(fieldName);
-        setFieldValue(field, instance, value);
     }
 
     public static Object getFieldValue(Field field, Object instance) {

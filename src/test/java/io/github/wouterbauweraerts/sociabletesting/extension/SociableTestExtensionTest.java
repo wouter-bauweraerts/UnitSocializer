@@ -35,8 +35,8 @@ class SociableTestExtensionTest {
     void setUp() throws Exception {
         extension = new SociableTestExtension();
 
-        ReflectionUtil.setField(extension, ctx, "sociableTestContext");
-        ReflectionUtil.setField(extension, callbackHandler, "beforeEachCallbackHandler");
+        ReflectionUtil.setFieldValue(SociableTestExtension.class.getDeclaredField("sociableTestContext"), extension, ctx);
+        ReflectionUtil.setFieldValue(SociableTestExtension.class.getDeclaredField("beforeEachCallbackHandler"), extension, callbackHandler);
     }
 
     @Test
