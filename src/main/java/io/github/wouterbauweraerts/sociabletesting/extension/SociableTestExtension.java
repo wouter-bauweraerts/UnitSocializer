@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
@@ -14,9 +15,14 @@ import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.core.TestSubjectFactory;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 
-public class SociableTestExtension implements BeforeEachCallback {
+public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
     private static final Logger LOGGER = Logger.getLogger(SociableTestExtension.class.getName());
     private static final SociableTestContext sociableTestContext = SociableTestContext.getInstance();
+
+    @Override
+    public void afterEach(ExtensionContext context) {
+        sociableTestContext.clear();
+    }
 
     @Override
     public void beforeEach(ExtensionContext context) {

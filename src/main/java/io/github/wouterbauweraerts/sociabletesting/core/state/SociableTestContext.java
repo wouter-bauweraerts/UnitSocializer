@@ -3,7 +3,6 @@ package io.github.wouterbauweraerts.sociabletesting.core.state;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO add tests
 public class SociableTestContext {
     private static final SociableTestContext INSTANCE = new SociableTestContext();
 
@@ -18,7 +17,7 @@ public class SociableTestContext {
     }
 
     public void clear() {
-        instances.clear(); //TODO implement callback after each test for safety
+        instances.clear();
     }
 
     public <T> T putIfAbsent(Class<?> clazz, Object instance) {
