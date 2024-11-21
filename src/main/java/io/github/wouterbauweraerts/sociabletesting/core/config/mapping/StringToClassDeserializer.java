@@ -2,7 +2,6 @@ package io.github.wouterbauweraerts.sociabletesting.core.config.mapping;
 
 import java.io.IOException;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -15,7 +14,7 @@ public class StringToClassDeserializer extends StdDeserializer<Class<?>> {
     }
 
     @Override
-    public Class<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public Class<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         String stringValue = deserializationContext.readValue(jsonParser, String.class);
         try {
             Class<?> result = Class.forName(stringValue);
