@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.dummies.mocks;
+package io.github.wouterbauweraerts.sociabletesting.extension.success;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mockingDetails;
@@ -11,10 +11,12 @@ import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance
 import io.github.wouterbauweraerts.sociabletesting.annotation.Predefined;
 import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
-import io.github.wouterbauweraerts.sociabletesting.predefined.PredefinedService;
+import io.github.wouterbauweraerts.sociabletesting.demo.dummies.annotated.AnnotatedDummyToMock;
+import io.github.wouterbauweraerts.sociabletesting.demo.dummies.annotated.DummyWithAnnotatedClassToMock;
+import io.github.wouterbauweraerts.sociabletesting.demo.dummies.predefined.PredefinedService;
 
 @SociableTest
-class DummyWithAnnotatedClassToMockTest {
+class CanInstantiateDummyWithDependencyAnnotatedToMockDependency {
     private static final Random RND = new Random();
     @TestSubject
     DummyWithAnnotatedClassToMock subject;

@@ -1,6 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.dummies.mocks;
-
-import io.github.wouterbauweraerts.sociabletesting.mocking.DummyClassToMock;
+package io.github.wouterbauweraerts.sociabletesting.demo.dummies.mocking;
 
 public class DummyWithClassToMock {
     private final DummyClassToMock toMock;

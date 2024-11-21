@@ -1,6 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.dummies.simpledependency;
-
-import io.github.wouterbauweraerts.sociabletesting.extension.dummies.simple.SimpleDummy;
+package io.github.wouterbauweraerts.sociabletesting.demo.dummies;
 
 public class DummyWithSimpleDependency {
     private final SimpleDummy simpleDummy;

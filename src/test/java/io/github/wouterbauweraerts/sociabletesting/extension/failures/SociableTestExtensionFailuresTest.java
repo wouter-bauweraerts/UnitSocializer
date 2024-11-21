@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension;
+package io.github.wouterbauweraerts.sociabletesting.extension.failures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectMethod;
@@ -10,13 +10,11 @@ import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
-import io.github.wouterbauweraerts.sociabletesting.extension.dummies.MissingTestSubjectTest;
-
 class SociableTestExtensionFailuresTest {
 
     @Test
     void startupShouldFailWhenNoTestSubject() {
-        TestExecutionSummary summary = runTestMethod(MissingTestSubjectTest.class, "shouldFail");
+        TestExecutionSummary summary = runTestMethod(CanNotStartSociableTestWithoutTestSubjectTest.class, "shouldFail");
 
         assertThat(summary.getFailures()).hasSize(1)
                 .allSatisfy(failure -> assertThat(failure.getException()).isInstanceOf(UnsupportedOperationException.class)

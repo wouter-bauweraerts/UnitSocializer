@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.predefined;
+package io.github.wouterbauweraerts.sociabletesting.demo.dummies.predefined;
 
 public class PredefinedService {
     private final int intValue;

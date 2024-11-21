@@ -1,6 +1,6 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.dummies.mocks;
+package io.github.wouterbauweraerts.sociabletesting.demo.dummies.mocking;
 
-import io.github.wouterbauweraerts.sociabletesting.mocking.mockpackage.AmazingClass;
+import io.github.wouterbauweraerts.sociabletesting.demo.dummies.mocking.mockpackage.AmazingClass;
 
 public class DummyWithClassFromMockPackage {
     private final AmazingClass toMock;

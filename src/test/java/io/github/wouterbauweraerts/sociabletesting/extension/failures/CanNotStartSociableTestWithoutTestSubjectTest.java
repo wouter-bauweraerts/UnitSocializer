@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.dummies;
+package io.github.wouterbauweraerts.sociabletesting.extension.failures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,7 +9,7 @@ import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
 
 @SociableTest
 @Tag("dummyTest")
-public class MissingTestSubjectTest {
+public class CanNotStartSociableTestWithoutTestSubjectTest {
     @Test
     void shouldFail() {
         assertThat(true).isTrue();

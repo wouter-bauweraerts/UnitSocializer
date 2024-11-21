@@ -1,6 +1,6 @@
-package io.github.wouterbauweraerts.sociabletesting.extension.dummies.mocks;
+package io.github.wouterbauweraerts.sociabletesting.demo.dummies.annotated;
 
-import io.github.wouterbauweraerts.sociabletesting.predefined.PredefinedService;
+import io.github.wouterbauweraerts.sociabletesting.demo.dummies.predefined.PredefinedService;
 
 public class DummyWithAnnotatedClassToMock {
     private final AnnotatedDummyToMock dummy;
