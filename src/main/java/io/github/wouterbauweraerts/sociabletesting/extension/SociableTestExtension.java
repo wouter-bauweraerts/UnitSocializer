@@ -57,7 +57,7 @@ public class SociableTestExtension implements BeforeEachCallback {
 
                 sociableTestContext.putIfAbsent(predefinedFieldType, predefinedFieldValue);
             } catch (Exception e) {
-
+// TODO add exception handling
             } finally {
                 field.setAccessible(originalAccessibility);
             }
