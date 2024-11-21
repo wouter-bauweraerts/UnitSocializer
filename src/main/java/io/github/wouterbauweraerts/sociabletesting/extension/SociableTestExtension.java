@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance;
+import io.github.wouterbauweraerts.sociabletesting.annotation.Predefined;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.core.TestSubjectFactory;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
@@ -22,6 +23,10 @@ public class SociableTestExtension implements BeforeEachCallback {
         Class<?> testClass = context.getTestClass()
                 .orElseThrow(() -> new UnsupportedOperationException("TestClass not found!"));
 
+        List<Field> predefinedFields = Arrays.stream(testClass.getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(Predefined.class))
+                .toList();
+
         List<Field> testSubjects = Arrays.stream(testClass.getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(TestSubject.class))
                 .toList();
@@ -34,8 +39,30 @@ public class SociableTestExtension implements BeforeEachCallback {
             throw new UnsupportedOperationException("No fields annotated with @TestSubject found!");
         }
 
+        addPredefinedFields(context, predefinedFields);
         instantiateObjects(context, testSubjects);
         injectInstances(context, fieldsToInject);
+    }
+
+    private static void addPredefinedFields(ExtensionContext context, List<Field> predefinedFields) {
+        LOGGER.info("Handling @Predefined fields");
+
+        predefinedFields.forEach(field -> {
+            boolean originalAccessibility = field.canAccess(context.getRequiredTestInstance());
+            try {
+                field.setAccessible(true);
+
+                Class<?> predefinedFieldType = field.getType();
+                Object predefinedFieldValue = field.get(context.getRequiredTestInstance());
+
+                sociableTestContext.putIfAbsent(predefinedFieldType, predefinedFieldValue);
+            } catch (Exception e) {
+
+            } finally {
+                field.setAccessible(originalAccessibility);
+            }
+        });
+
     }
 
     private static void instantiateObjects(ExtensionContext context, List<Field> testSubjects) {

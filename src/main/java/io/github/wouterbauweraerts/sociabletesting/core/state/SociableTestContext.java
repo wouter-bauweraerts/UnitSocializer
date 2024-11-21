@@ -20,7 +20,7 @@ public class SociableTestContext {
         instances.clear();
     }
 
-    public <T> T putIfAbsent(Class<T> clazz, T instance) {
+    public <T> T putIfAbsent(Class<?> clazz, Object instance) {
         return (T)instances.putIfAbsent(clazz, instance);
     }
 
