@@ -11,14 +11,8 @@ import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
 import io.github.wouterbauweraerts.sociabletesting.extension.dummies.MissingTestSubjectTest;
-import io.github.wouterbauweraerts.sociabletesting.extension.dummies.simple.SimpleDummyTest;
 
-class SociableTestExtensionTest {
-    @Test
-    void canInstantiateWithDefaultConstructor() {
-        TestExecutionSummary summary = runTestMethod(SimpleDummyTest.class, "test");
-        assertThat(summary.getTestsSucceededCount()).isEqualTo(1);
-    }
+class SociableTestExtensionFailuresTest {
 
     @Test
     void startupShouldFailWhenNoTestSubject() {

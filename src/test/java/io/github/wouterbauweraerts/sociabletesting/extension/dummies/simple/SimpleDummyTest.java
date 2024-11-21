@@ -8,7 +8,7 @@ import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
 import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
 
 @SociableTest
-public class SimpleDummyTest {
+class SimpleDummyTest {
     @TestSubject
     SimpleDummy simpleDummy;
 
