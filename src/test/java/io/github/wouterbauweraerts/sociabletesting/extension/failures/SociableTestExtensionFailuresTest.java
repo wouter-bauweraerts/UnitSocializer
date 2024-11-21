@@ -10,6 +10,8 @@ import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
+
 class SociableTestExtensionFailuresTest {
 
     @Test
@@ -17,7 +19,7 @@ class SociableTestExtensionFailuresTest {
         TestExecutionSummary summary = runTestMethod(CanNotStartSociableTestWithoutTestSubjectTest.class, "shouldFail");
 
         assertThat(summary.getFailures()).hasSize(1)
-                .allSatisfy(failure -> assertThat(failure.getException()).isInstanceOf(UnsupportedOperationException.class)
+                .allSatisfy(failure -> assertThat(failure.getException()).isInstanceOf(SociableTestException.class)
                         .hasMessage("No fields annotated with @TestSubject found!"));
     }
 
