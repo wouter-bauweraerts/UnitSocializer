@@ -64,8 +64,6 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
                 sociableTestContext.putIfAbsent(predefinedFieldType, predefinedFieldValue);
             } catch (Exception e) {
-                LOGGER.severe("Exception occurred while handling @Predefined fields");
-                LOGGER.severe(e.getMessage());
                 throw new SociableTestException("Exception occurred while handling @Predefined fields", e);
             } finally {
                 field.setAccessible(originalAccessibility);
