@@ -6,15 +6,29 @@
     <groupId>io.github.wouter-bauweraerts</groupId>
     <artifactId>sociable-testing</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Sociable Testing</name>
+
+    <modules>
+        <module>sociable-testing-core</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.projectKey>wouter-bauweraerts_sociable-testing</sonar.projectKey>
         <sonar.organization>wouter-bauweraerts</sonar.organization>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sociable-testing-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
