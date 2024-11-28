@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.annotation;
+package io.github.wouterbauweraerts.sociabletesting.core.annotation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Documented
 @Target(FIELD)
 @Retention(RUNTIME)
-public @interface InjectTestInstance {
+public @interface TestSubject {
 }

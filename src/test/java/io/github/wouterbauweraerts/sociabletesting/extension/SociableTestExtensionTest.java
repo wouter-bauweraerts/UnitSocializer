@@ -15,6 +15,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
+import io.github.wouterbauweraerts.sociabletesting.core.extension.BeforeEachCallbackHandler;
+import io.github.wouterbauweraerts.sociabletesting.core.extension.SociableTestExtension;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 import io.github.wouterbauweraerts.sociabletesting.util.ReflectionUtil;
 

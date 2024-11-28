@@ -6,9 +6,9 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.wouterbauweraerts.sociabletesting.annotation.Predefined;
-import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
-import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.Predefined;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.SociableTest;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.TestSubject;
 
 @SociableTest
 class CanInstantiateDummyWithPredefinedDependencyTest {

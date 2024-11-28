@@ -5,9 +5,9 @@ import static org.mockito.Mockito.mockingDetails;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance;
-import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
-import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.InjectTestInstance;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.SociableTest;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.dummies.mocking.DummyAnnotation;
 
 @SociableTest

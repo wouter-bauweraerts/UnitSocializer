@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.annotation;
+package io.github.wouterbauweraerts.sociabletesting.core.annotation;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.github.wouterbauweraerts.sociabletesting.extension.SociableTestExtension;
+import io.github.wouterbauweraerts.sociabletesting.core.extension.SociableTestExtension;
 
 @Documented
 @Target(TYPE)

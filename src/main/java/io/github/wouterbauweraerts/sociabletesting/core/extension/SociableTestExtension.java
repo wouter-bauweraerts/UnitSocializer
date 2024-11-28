@@ -1,10 +1,14 @@
-package io.github.wouterbauweraerts.sociabletesting.extension;
+package io.github.wouterbauweraerts.sociabletesting.core.extension;
 
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
+import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
+import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
+import io.github.wouterbauweraerts.sociabletesting.core.factory.InstanceFactory;
+import io.github.wouterbauweraerts.sociabletesting.core.factory.MockFactory;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
@@ -14,7 +18,9 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
     public SociableTestExtension() {
         sociableTestContext = SociableTestContext.getInstance();
-        beforeEachCallbackHandler = BeforeEachCallbackHandler.getInstance();
+        MockingConfig mockingConfig = MockingConfigReader.loadConfig();
+        InstanceFactory instanceFactory = new InstanceFactory(mockingConfig, new MockFactory(mockingConfig));
+        beforeEachCallbackHandler = new BeforeEachCallbackHandler(sociableTestContext, instanceFactory);
     }
 
     @Override

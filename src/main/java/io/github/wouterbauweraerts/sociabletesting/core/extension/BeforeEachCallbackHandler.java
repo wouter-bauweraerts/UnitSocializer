@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.extension;
+package io.github.wouterbauweraerts.sociabletesting.core.extension;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -6,24 +6,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-import io.github.wouterbauweraerts.sociabletesting.annotation.InjectTestInstance;
-import io.github.wouterbauweraerts.sociabletesting.annotation.Predefined;
-import io.github.wouterbauweraerts.sociabletesting.annotation.TestSubject;
-import io.github.wouterbauweraerts.sociabletesting.core.TestSubjectFactory;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.InjectTestInstance;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.Predefined;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.TestSubject;
+import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
+import io.github.wouterbauweraerts.sociabletesting.core.factory.InstanceFactory;
+import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
+import io.github.wouterbauweraerts.sociabletesting.core.factory.MockFactory;
 import io.github.wouterbauweraerts.sociabletesting.core.state.SociableTestContext;
 import io.github.wouterbauweraerts.sociabletesting.util.ReflectionUtil;
 
 public class BeforeEachCallbackHandler {
     private static final Logger LOGGER = Logger.getLogger(BeforeEachCallbackHandler.class.getName());
-    private static final BeforeEachCallbackHandler INSTANCE = new BeforeEachCallbackHandler();
 
     private final SociableTestContext sociableTestContext;
-
-    public static BeforeEachCallbackHandler getInstance() {
-        return INSTANCE;
-    }
+    private final InstanceFactory instanceFactory;
 
     private static List<Field> filterFields(Field[] fields, Class<? extends Annotation> annotation) {
         return Arrays.stream(fields)
@@ -31,8 +30,9 @@ public class BeforeEachCallbackHandler {
                 .toList();
     }
 
-    private BeforeEachCallbackHandler() {
-        sociableTestContext = SociableTestContext.getInstance();
+    public BeforeEachCallbackHandler(SociableTestContext context, InstanceFactory instanceFactory) {
+        this.sociableTestContext = context;
+        this.instanceFactory = instanceFactory;
     }
 
     public void beforeEach(Class<?> testClass, Object testInstance) {
@@ -70,7 +70,7 @@ public class BeforeEachCallbackHandler {
 
         testSubjects.forEach(field -> {
             try {
-                ReflectionUtil.setFieldValue(field, testInstance, TestSubjectFactory.instantiate(field.getType()));
+                ReflectionUtil.setFieldValue(field, testInstance, instanceFactory.instantiate(field.getType()));
             } catch (Exception e) {
                 throw new SociableTestInstantiationException("Unable to create test subject %s".formatted(field.getType().getName()), e);
             }

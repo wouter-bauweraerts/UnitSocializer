@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import io.github.wouterbauweraerts.sociabletesting.annotation.SociableTest;
+import io.github.wouterbauweraerts.sociabletesting.core.annotation.SociableTest;
 
 @SociableTest
 @Tag("dummyTest")
