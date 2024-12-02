@@ -40,7 +40,7 @@ class SociableTestContextTest {
         String instance = "Foo";
         Object returnVal = ctx.putIfAbsent(String.class, instance);
 
-        assertThat(returnVal).isNull();
+        assertThat(returnVal).isSameAs(instance);
         assertThat(getInstancesFromContext()).hasSize(1)
                 .containsEntry(String.class, instance);
     }

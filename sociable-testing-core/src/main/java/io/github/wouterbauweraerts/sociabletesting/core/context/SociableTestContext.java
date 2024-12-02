@@ -2,6 +2,7 @@ package io.github.wouterbauweraerts.sociabletesting.core.context;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SociableTestContext {
     private static final SociableTestContext INSTANCE = new SociableTestContext();
@@ -20,8 +21,9 @@ public class SociableTestContext {
         instances.clear();
     }
 
-    public <T> T putIfAbsent(Class<?> clazz, Object instance) {
-        return (T)instances.putIfAbsent(clazz, instance);
+    public <T> T putIfAbsent(Class<?> clazz, T instance) {
+        T existingInstance = (T)instances.putIfAbsent(clazz, instance);
+        return Objects.nonNull(existingInstance) ? existingInstance : instance;
     }
 
     public <T> T get(Class<T> clazz) {

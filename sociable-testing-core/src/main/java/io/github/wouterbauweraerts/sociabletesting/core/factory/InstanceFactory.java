@@ -8,6 +8,7 @@ import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 
+@SuppressWarnings("unused")
 public class InstanceFactory {
     private final MockingConfig config;
     private final MockFactory mockFactory;
@@ -25,9 +26,10 @@ public class InstanceFactory {
         }
 
         if (mockFactory.shouldMock(type)) {
-            T mock = mockFactory.mock(type);
-            instances.putIfAbsent(type, mock);
-            return mock;
+            return instances.putIfAbsent(
+                    type,
+                    mockFactory.mock(type)
+            );
         }
 
         Constructor<T> constructor = (Constructor<T>) Arrays.stream(type.getDeclaredConstructors())
