@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;
-import io.github.wouterbauweraerts.sociabletesting.dummies.SimpleDummy;
+import io.github.wouterbauweraerts.sociabletesting.core.dummies.SimpleDummy;
 
 class SociableTestContextTest {
     SociableTestContext ctx = SociableTestContext.getInstance();
@@ -40,7 +40,7 @@ class SociableTestContextTest {
         String instance = "Foo";
         Object returnVal = ctx.putIfAbsent(String.class, instance);
 
-        assertThat(returnVal).isNull();
+        assertThat(returnVal).isSameAs(instance);
         assertThat(getInstancesFromContext()).hasSize(1)
                 .containsEntry(String.class, instance);
     }

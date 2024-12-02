@@ -1,7 +1,5 @@
 package io.github.wouterbauweraerts.sociabletesting.core.factory;
 
-import static org.mockito.Mockito.mock;
-
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -10,6 +8,7 @@ import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 
+@SuppressWarnings("unused")
 public class InstanceFactory {
     private final MockingConfig config;
     private final MockFactory mockFactory;
@@ -27,9 +26,10 @@ public class InstanceFactory {
         }
 
         if (mockFactory.shouldMock(type)) {
-            T mock = mock(type);
-            instances.putIfAbsent(type, mock);
-            return mock;
+            return instances.putIfAbsent(
+                    type,
+                    mockFactory.mock(type)
+            );
         }
 
         Constructor<T> constructor = (Constructor<T>) Arrays.stream(type.getDeclaredConstructors())
