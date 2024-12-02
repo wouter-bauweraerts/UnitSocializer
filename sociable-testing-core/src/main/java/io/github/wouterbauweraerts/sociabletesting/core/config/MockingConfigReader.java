@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.sociabletesting.core.config.mapping.MockingConfigModule;
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 
 public class MockingConfigReader {
     private static final String DEFAULT_RESOURCE_NAME = "sociable-testing-defaults.yaml";

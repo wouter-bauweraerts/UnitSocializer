@@ -10,7 +10,6 @@ import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestCont
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.extension.BeforeEachCallbackHandler;
 import io.github.wouterbauweraerts.sociabletesting.core.factory.InstanceFactory;
-import io.github.wouterbauweraerts.sociabletesting.core.factory.MockFactory;
 import io.github.wouterbauweraerts.sociabletesting.junit.mockito.factory.MockitoMockFactory;
 
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {

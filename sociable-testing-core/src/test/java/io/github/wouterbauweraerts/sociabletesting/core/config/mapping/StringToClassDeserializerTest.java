@@ -15,9 +15,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonStreamContext;
 import com.fasterxml.jackson.databind.DeserializationContext;
 
-import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.mocking.DummyAnnotation;
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 
 @ExtendWith(MockitoExtension.class)
 class StringToClassDeserializerTest {
