@@ -1,7 +1,5 @@
 package io.github.wouterbauweraerts.sociabletesting.core.factory;
 
-import static org.mockito.Mockito.mock;
-
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -27,7 +25,7 @@ public class InstanceFactory {
         }
 
         if (mockFactory.shouldMock(type)) {
-            T mock = mock(type);
+            T mock = mockFactory.mock(type);
             instances.putIfAbsent(type, mock);
             return mock;
         }

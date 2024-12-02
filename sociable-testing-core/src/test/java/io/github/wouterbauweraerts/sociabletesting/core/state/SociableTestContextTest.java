@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;
-import io.github.wouterbauweraerts.sociabletesting.dummies.SimpleDummy;
+import io.github.wouterbauweraerts.sociabletesting.core.dummies.SimpleDummy;
 
 class SociableTestContextTest {
     SociableTestContext ctx = SociableTestContext.getInstance();

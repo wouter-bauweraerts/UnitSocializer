@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfig;
 
-public class MockFactory {
+public abstract class MockFactory {
     private final MockingConfig config;
 
     public MockFactory(MockingConfig config) {
@@ -21,4 +21,6 @@ public class MockFactory {
 
         return annotatedWithOneOfAnnotationsToBeMocked || typeShouldBeMocked || packageShouldBeMocked;
     }
+
+    public abstract <T> T mock(Class<T> type);
 }

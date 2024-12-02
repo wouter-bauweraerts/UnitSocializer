@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigReader;
-import io.github.wouterbauweraerts.sociabletesting.dummies.mocking.DummyAnnotation;
+import io.github.wouterbauweraerts.sociabletesting.core.dummies.mocking.DummyAnnotation;
 
 @ExtendWith(MockitoExtension.class)
 class StringToClassDeserializerTest {
