@@ -29,7 +29,5 @@ jobs:
     - name: Build with Maven
       run: |
         mvn clean verify sonar:sonar
-        pwd
-        ls -al /home/runner/work/sociable-testing/sociable-testing/sociable-testing-jacoco/target/site/jacoco-aggregate
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
