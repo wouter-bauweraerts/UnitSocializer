@@ -30,6 +30,6 @@ jobs:
       run: |
         mvn clean verify sonar:sonar
         pwd
-        ls -al ./target
+        ls -al ./sociable-testing-jacoco/target/site/jacoco-aggregate
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
