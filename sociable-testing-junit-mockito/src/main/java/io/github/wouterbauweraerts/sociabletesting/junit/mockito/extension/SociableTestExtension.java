@@ -9,8 +9,7 @@ import io.github.wouterbauweraerts.sociabletesting.core.config.MockingConfigRead
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.extension.BeforeEachCallbackHandler;
-import io.github.wouterbauweraerts.sociabletesting.core.factory.InstanceFactory;
-import io.github.wouterbauweraerts.sociabletesting.junit.mockito.factory.MockitoMockFactory;
+import io.github.wouterbauweraerts.sociabletesting.junit.mockito.JunitMockitoSociableTestInitializer;
 
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
 
@@ -20,8 +19,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
     public SociableTestExtension() {
         sociableTestContext = SociableTestContext.getInstance();
         MockingConfig mockingConfig = MockingConfigReader.loadConfig();
-        InstanceFactory instanceFactory = new InstanceFactory(mockingConfig, new MockitoMockFactory(mockingConfig));
-        beforeEachCallbackHandler = new BeforeEachCallbackHandler(sociableTestContext, instanceFactory);
+        beforeEachCallbackHandler = JunitMockitoSociableTestInitializer.beforeEachCallbackHandler(sociableTestContext, mockingConfig);
     }
 
     @Override
