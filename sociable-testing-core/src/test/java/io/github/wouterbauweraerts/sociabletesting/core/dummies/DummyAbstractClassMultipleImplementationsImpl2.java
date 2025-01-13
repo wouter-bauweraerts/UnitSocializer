@@ -1,0 +1,4 @@
+package io.github.wouterbauweraerts.sociabletesting.core.dummies;
+
+public class DummyAbstractClassMultipleImplementationsImpl2 extends DummyAbstractClassMultipleImplementations {
+}
