@@ -2,14 +2,11 @@ package io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.fail
 
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyInterfaceNoImplementations;
 
+@SuppressWarnings("unused")
 public class DependsOnDummyWithoutImplementation {
     private DummyInterfaceNoImplementations dependency;
 
     public DependsOnDummyWithoutImplementation(DummyInterfaceNoImplementations dependency) {
         this.dependency = dependency;
-    }
-
-    public DummyInterfaceNoImplementations getDependency() {
-        return dependency;
     }
 }

@@ -2,6 +2,7 @@ package io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.fail
 
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyInterfaceMultipleImplementations;
 
+@SuppressWarnings("unused")
 public class DependsOnDummyWithMultipleImplementations {
     private DummyInterfaceMultipleImplementations dependency;
 
