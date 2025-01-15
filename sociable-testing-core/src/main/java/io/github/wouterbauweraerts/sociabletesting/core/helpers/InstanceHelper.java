@@ -2,7 +2,6 @@ package io.github.wouterbauweraerts.sociabletesting.core.helpers;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.function.Supplier;
 
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;

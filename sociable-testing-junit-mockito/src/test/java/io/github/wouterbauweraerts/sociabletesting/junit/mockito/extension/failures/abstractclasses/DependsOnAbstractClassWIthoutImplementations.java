@@ -2,6 +2,7 @@ package io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.fail
 
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyAbstractClassNoImplementations;
 
+@SuppressWarnings("unused")
 public class DependsOnAbstractClassWIthoutImplementations {
     private DummyAbstractClassNoImplementations dependency;
 
