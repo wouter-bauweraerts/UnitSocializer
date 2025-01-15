@@ -12,14 +12,14 @@ import io.github.wouterbauweraerts.sociabletesting.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
-import io.github.wouterbauweraerts.sociabletesting.core.factory.InstanceFactory;
+import io.github.wouterbauweraerts.sociabletesting.core.helpers.InstanceHelper;
 import io.github.wouterbauweraerts.sociabletesting.core.util.ReflectionUtil;
 
 public class BeforeEachCallbackHandler {
     private static final Logger LOGGER = Logger.getLogger(BeforeEachCallbackHandler.class.getName());
 
     private final SociableTestContext sociableTestContext;
-    private final InstanceFactory instanceFactory;
+    private final InstanceHelper instanceHelper;
 
     private static List<Field> filterFields(Field[] fields, Class<? extends Annotation> annotation) {
         return Arrays.stream(fields)
@@ -27,9 +27,9 @@ public class BeforeEachCallbackHandler {
                 .toList();
     }
 
-    public BeforeEachCallbackHandler(SociableTestContext context, InstanceFactory instanceFactory) {
+    public BeforeEachCallbackHandler(SociableTestContext context, InstanceHelper instanceHelper) {
         this.sociableTestContext = context;
-        this.instanceFactory = instanceFactory;
+        this.instanceHelper = instanceHelper;
     }
 
     public void beforeEach(Class<?> testClass, Object testInstance) {
@@ -67,7 +67,9 @@ public class BeforeEachCallbackHandler {
 
         testSubjects.forEach(field -> {
             try {
-                ReflectionUtil.setFieldValue(field, testInstance, instanceFactory.instantiate(field.getType()));
+                ReflectionUtil.setFieldValue(field, testInstance, instanceHelper.instantiate(field.getType()));
+            } catch (SociableTestException ste) {
+                throw ste;
             } catch (Exception e) {
                 throw new SociableTestInstantiationException("Unable to create test subject %s".formatted(field.getType().getName()), e);
             }

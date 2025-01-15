@@ -13,7 +13,6 @@
     <artifactId>sociable-testing-junit-mockito</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <mockito.version>5.14.2</mockito.version>
     </properties>
 
     <dependencies>
@@ -34,7 +33,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.3</version>
+            <version>${junit.version}</version>
             <scope>compile</scope>
         </dependency>
 
