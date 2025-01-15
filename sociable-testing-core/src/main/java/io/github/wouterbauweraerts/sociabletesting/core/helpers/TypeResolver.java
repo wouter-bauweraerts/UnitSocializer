@@ -44,13 +44,14 @@ public class TypeResolver {
 
     private <T> List<Class<?>> doFind(Class<T> abstractType) {
         ComponentSupplier componentSupplier = ComponentSupplier.getInstance();
-        PathHelper pathHelper = componentSupplier.getPathHelper();
         ClassHunter classHunter = componentSupplier.getClassHunter();
 
-        pathHelper.getBurningwaveRuntimeClassPath();
-        return classHunter.findBy(SearchConfig.byCriteria(
-                        ClassCriteria.create().allThoseThatMatch(abstractType::isAssignableFrom)
-                )).getClasses().stream()
-                .toList();
+        try(ClassCriteria cc = ClassCriteria.create().allThoseThatMatch(abstractType::isAssignableFrom)) {
+            return classHunter.findBy(SearchConfig.byCriteria(cc)).getClasses()
+                    .stream()
+                    .toList();
+        } catch (Exception e) {
+            throw new SociableTestException("Something went wrong while resolving type of " + abstractType, e);
+        }
     }
 }
