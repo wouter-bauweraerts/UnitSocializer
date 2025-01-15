@@ -50,6 +50,11 @@ public class InstanceHelper {
         T instance = typeHelper.createInstance(constructor, paramResolver);
 
         instances.putIfAbsent(type, instance);
+
+        if (!typeToCreate.getSimpleName().equals(type.getSimpleName())) {
+            instances.putIfAbsent(typeToCreate, instance);
+        }
+
         return instance;
     }
 }
