@@ -68,6 +68,8 @@ public class BeforeEachCallbackHandler {
         testSubjects.forEach(field -> {
             try {
                 ReflectionUtil.setFieldValue(field, testInstance, instanceHelper.instantiate(field.getType()));
+            } catch (SociableTestException ste) {
+                throw ste;
             } catch (Exception e) {
                 throw new SociableTestInstantiationException("Unable to create test subject %s".formatted(field.getType().getName()), e);
             }

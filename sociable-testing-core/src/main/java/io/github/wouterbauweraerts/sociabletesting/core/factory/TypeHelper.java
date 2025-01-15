@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Supplier;
 
+import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 
 public class TypeHelper {
@@ -22,9 +23,10 @@ public class TypeHelper {
                         paramResolver.get()
                 );
             };
+        } catch (SociableTestException ste) {
+            throw ste;
         } catch (Exception e) {
             throw new SociableTestInstantiationException("Exception occurred while instantiating test subject", e);
-
         }
     }
 }
