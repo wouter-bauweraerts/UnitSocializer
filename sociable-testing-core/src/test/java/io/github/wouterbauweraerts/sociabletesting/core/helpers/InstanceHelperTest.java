@@ -85,6 +85,7 @@ class InstanceHelperTest {
 
         when(mockFactory.shouldMock(abstractType)).thenReturn(false);
         when(mockFactory.spy(any())).thenAnswer(a -> a.getArgument(0));
+        when(typeResolver.hasResolvedType(abstractType)).thenReturn(false);
         when(typeResolver.isAbstract(abstractType)).thenReturn(true);
 
         doReturn(concreteType).when(typeResolver).resolveType(abstractType);
@@ -97,8 +98,36 @@ class InstanceHelperTest {
 
         verify(mockFactory).shouldMock(abstractType);
         verify(typeHelper).isJavaType(abstractType);
+        verify(typeResolver).hasResolvedType(abstractType);
         verify(typeResolver).isAbstract(abstractType);
         verify(typeResolver).resolveType(abstractType);
+        verify(typeHelper).getConstructor(concreteType);
+        verify(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
+    }
+
+    @Test
+    void instantiate_instanceDoesNotExist_shouldNotBeMocked_hasResolvedType_resolvesAndInstantiatesType_addsToMapTwice() {
+        Class<?> abstractType = DummyInterface.class;
+        Class<?> concreteType = DummyInterfaceImpl.class;
+        Constructor<DummyInterface> defaultConstructor = mock(Constructor.class);
+        DummyInterfaceImpl dummyInterface = mock(DummyInterfaceImpl.class);
+
+        when(mockFactory.shouldMock(abstractType)).thenReturn(false);
+        when(mockFactory.spy(any())).thenAnswer(a -> a.getArgument(0));
+        when(typeResolver.hasResolvedType(abstractType)).thenReturn(true);
+
+        doReturn(concreteType).when(typeResolver).resolve(abstractType);
+        doReturn(defaultConstructor).when(typeHelper).getConstructor(concreteType);
+        doReturn(dummyInterface).when(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
+
+        assertThat(instanceHelper.instantiate(abstractType)).isSameAs(dummyInterface);
+        assertThat(CTX.get(abstractType)).isSameAs(dummyInterface);
+        assertThat(CTX.get(concreteType)).isSameAs(dummyInterface);
+
+        verify(mockFactory).shouldMock(abstractType);
+        verify(typeHelper).isJavaType(abstractType);
+        verify(typeResolver).hasResolvedType(abstractType);
+        verify(typeResolver).resolve(abstractType);
         verify(typeHelper).getConstructor(concreteType);
         verify(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
     }
@@ -112,6 +141,7 @@ class InstanceHelperTest {
         when(mockFactory.shouldMock(type)).thenReturn(false);
         when(typeHelper.isJavaType(any())).thenReturn(false);
         when(typeResolver.isAbstract(type)).thenReturn(false);
+        when(typeResolver.hasResolvedType(type)).thenReturn(false);
         when(mockFactory.spy(any())).thenAnswer(a -> a.getArgument(0));
         doReturn(defaultConstructor).when(typeHelper).getConstructor(type);
         doReturn(sd).when(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
@@ -123,6 +153,7 @@ class InstanceHelperTest {
         verify(mockFactory).spy(sd);
         verify(typeHelper).isJavaType(type);
         verify(typeResolver).isAbstract(type);
+        verify(typeResolver).hasResolvedType(type);
         verify(typeHelper).getConstructor(type);
         verify(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
     }

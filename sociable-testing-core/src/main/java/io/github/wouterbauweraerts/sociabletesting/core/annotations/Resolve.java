@@ -1,15 +1,14 @@
 package io.github.wouterbauweraerts.sociabletesting.core.annotations;
 
-import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Documented
-@Target(FIELD)
+@Target(ANNOTATION_TYPE)
 @Retention(RUNTIME)
-public @interface TestSubject {
-    Resolve[] typeResolvers() default {};
+public @interface Resolve {
+    Class<?> forClass();
+    Class<?> use();
 }

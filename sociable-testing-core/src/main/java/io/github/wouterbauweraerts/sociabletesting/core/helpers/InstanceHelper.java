@@ -21,6 +21,10 @@ public class InstanceHelper {
         this.typeHelper = typeHelper;
     }
 
+    public TypeResolver getTypeResolver() {
+        return typeResolver;
+    }
+
     public <T> T instantiate(Class<T> type) throws SociableTestInstantiationException {
         SociableTestContext instances = SociableTestContext.getInstance();
         Class<? extends T> typeToCreate = type;
@@ -30,8 +34,6 @@ public class InstanceHelper {
         }
 
         if (typeHelper.isJavaType(type)) {
-            // Create instance
-            // Return without adding to the map
             return typeHelper.createJavaType(type);
         }
 
@@ -41,8 +43,9 @@ public class InstanceHelper {
                     mockFactory.mock(type)
             );
         }
-
-        if (typeResolver.isAbstract(type)) {
+        if (typeResolver.hasResolvedType(type)) {
+            typeToCreate = typeResolver.resolve(type);
+        } else if (typeResolver.isAbstract(type)) {
             typeToCreate = typeResolver.resolveType(type);
         }
 
