@@ -29,6 +29,12 @@ public class InstanceHelper {
             return instances.get(type);
         }
 
+        if (typeHelper.isJavaType(type)) {
+            // Create instance
+            // Return without adding to the map
+            return typeHelper.createJavaType(type);
+        }
+
         if (mockFactory.shouldMock(type)) {
             return instances.putIfAbsent(
                     type,

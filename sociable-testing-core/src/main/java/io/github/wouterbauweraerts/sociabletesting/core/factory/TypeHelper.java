@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Supplier;
 
+import org.instancio.Instancio;
+
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestInstantiationException;
 
@@ -28,5 +30,16 @@ public class TypeHelper {
         } catch (Exception e) {
             throw new SociableTestInstantiationException("Exception occurred while instantiating test subject", e);
         }
+    }
+
+    public boolean isJavaType(Class<?> type) {
+        return type.isPrimitive() || type.getPackage().getName().startsWith("java.");
+    }
+
+    public <T> T createJavaType(Class<T> javaType) {
+        if (!isJavaType(javaType)) {
+            throw new SociableTestException("Cannot create Java type. %s is not a Java type!".formatted(javaType.getCanonicalName()));
+        }
+        return Instancio.create(javaType);
     }
 }

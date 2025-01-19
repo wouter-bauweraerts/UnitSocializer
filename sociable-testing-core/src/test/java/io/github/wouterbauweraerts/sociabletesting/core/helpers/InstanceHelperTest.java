@@ -71,8 +71,9 @@ class InstanceHelperTest {
         assertThat(instanceHelper.instantiate(type)).isSameAs(sd);
         verify(mockFactory).shouldMock(type);
         verify(mockFactory).mock(type);
+        verify(typeHelper).isJavaType(type);
 
-        verifyNoInteractions(typeResolver, typeHelper);
+        verifyNoMoreInteractions(typeResolver, typeHelper);
     }
 
     @Test
@@ -93,6 +94,7 @@ class InstanceHelperTest {
         assertThat(CTX.get(concreteType)).isSameAs(dummyInterface);
 
         verify(mockFactory).shouldMock(abstractType);
+        verify(typeHelper).isJavaType(abstractType);
         verify(typeResolver).isAbstract(abstractType);
         verify(typeResolver).resolveType(abstractType);
         verify(typeHelper).getConstructor(concreteType);
@@ -106,6 +108,7 @@ class InstanceHelperTest {
         SimpleDummy sd = mock(SimpleDummy.class);
 
         when(mockFactory.shouldMock(type)).thenReturn(false);
+        when(typeHelper.isJavaType(any())).thenReturn(false);
         when(typeResolver.isAbstract(type)).thenReturn(false);
         doReturn(defaultConstructor).when(typeHelper).getConstructor(type);
         doReturn(sd).when(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
@@ -114,6 +117,7 @@ class InstanceHelperTest {
         assertThat(CTX.get(type)).isSameAs(sd);
 
         verify(mockFactory).shouldMock(type);
+        verify(typeHelper).isJavaType(type);
         verify(typeResolver).isAbstract(type);
         verify(typeHelper).getConstructor(type);
         verify(typeHelper).createInstance(eq(defaultConstructor), any(Supplier.class));
