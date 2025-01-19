@@ -3,7 +3,9 @@ package io.github.wouterbauweraerts.sociabletesting.core.helpers;
 import static java.util.Objects.isNull;
 
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.burningwave.core.assembler.ComponentSupplier;
 import org.burningwave.core.classes.ClassCriteria;
@@ -13,12 +15,34 @@ import org.burningwave.core.classes.SearchConfig;
 import io.github.wouterbauweraerts.sociabletesting.core.exception.SociableTestException;
 
 public class TypeResolver {
+    private final Map<Class<?>, Class<?>> typeResolverCache;
+
+    public TypeResolver() {
+        typeResolverCache = new HashMap<>();
+    }
+
+    public boolean hasResolvedType(Class<?> abstractType) {
+        return typeResolverCache.containsKey(abstractType);
+    }
+
+    public <T> Class<? extends T> resolve(Class<T> typeToResolve) {
+        return  (Class<? extends T>) typeResolverCache.get(typeToResolve);
+    }
+
+    public void addResolver(Class<?> forClass, Class<?> useClass) {
+        typeResolverCache.put(forClass, useClass);
+    }
+
     public boolean isAbstract(Class<?> clazz) {
         int classModifiers = clazz.getModifiers();
         return clazz.isInterface() || Modifier.isInterface(classModifiers) || Modifier.isAbstract(classModifiers);
     }
 
     public <T> Class<? extends T> resolveType(Class<T> abstractType) {
+        if (hasResolvedType(abstractType)) {
+            return (resolve(abstractType));
+        }
+
         List<Class<?>> implementations = findImplementations(abstractType)
                 .stream()
                 .filter(c -> !this.isAbstract(c))

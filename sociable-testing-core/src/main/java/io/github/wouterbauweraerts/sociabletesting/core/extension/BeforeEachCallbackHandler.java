@@ -41,9 +41,22 @@ public class BeforeEachCallbackHandler {
             throw new SociableTestException("No fields annotated with @TestSubject found!");
         }
 
+        addResolvers(testSubjects);
         addPredefinedFields(testInstance, predefinedFields);
         instantiateObjects(testInstance, testSubjects);
         injectInstances(testInstance, fieldsToInject);
+    }
+
+    private void addResolvers(List<Field> testSubjects) {
+        testSubjects.stream()
+                .map(subject -> subject.getDeclaredAnnotation(TestSubject.class))
+                .flatMap(annotation -> Arrays.stream(annotation.typeResolvers()))
+                .forEach(
+                        typeConfig -> instanceHelper.getTypeResolver().addResolver(
+                                typeConfig.forClass(),
+                                typeConfig.use()
+                        )
+                );
     }
 
     private void addPredefinedFields(Object testInstance, List<Field> predefinedFields) {
