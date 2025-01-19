@@ -1,4 +1,4 @@
-package io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.success.resolve;
+package io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.success.resolve.interfaces;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,20 +8,22 @@ import io.github.wouterbauweraerts.sociabletesting.core.annotations.Resolve;
 import io.github.wouterbauweraerts.sociabletesting.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyAbstractClassMultipleImplementations;
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyAbstractClassMultipleImplementationsImpl2;
+import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyInterfaceMultipleImplementations;
+import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyInterfaceMultipleImplementationsImpl1;
 import io.github.wouterbauweraerts.sociabletesting.junit.mockito.annotations.SociableTest;
 
 @SociableTest
-public class CanResolveAbstractClassImplementationWithAnnotationTest {
+class CanResolveInterfaceImplementationWithAnnotationTest {
     @TestSubject(typeResolvers = @Resolve(
-            forClass = DummyAbstractClassMultipleImplementations.class,
-            use = DummyAbstractClassMultipleImplementationsImpl2.class
+            forClass = DummyInterfaceMultipleImplementations.class,
+            use = DummyInterfaceMultipleImplementationsImpl1.class
     ))
-    DummyWithResolvedAbstractClass dummy;
+    DummyWithResolvedInterface dummy;
 
     @Test
     void test() {
         assertThat(dummy).isNotNull();
         assertThat(dummy.dependency()).isNotNull()
-                .isInstanceOf(DummyAbstractClassMultipleImplementationsImpl2.class);
+                .isInstanceOf(DummyInterfaceMultipleImplementationsImpl1.class);
     }
 }
