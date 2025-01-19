@@ -1,8 +1,8 @@
 package io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.success;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mockingDetails;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.core.annotations.TestSubject;
@@ -10,14 +10,17 @@ import io.github.wouterbauweraerts.sociabletesting.core.dummies.SimpleDummy;
 import io.github.wouterbauweraerts.sociabletesting.junit.mockito.annotations.SociableTest;
 
 @SociableTest
-class CanIntantiateClassWithSimpleDependencyTest {
+class CanInstantiateClassWithSimpleDependencyTest {
     @TestSubject
     DummyWithSimpleDependency dummy;
 
     @Test
     void test() {
         assertThat(dummy).isNotNull();
-        Assertions.assertThat(dummy.simpleDummy()).isNotNull();
+
+        SimpleDummy dependency = dummy.simpleDummy();
+        assertThat(dependency).isNotNull();
+        assertThat(mockingDetails(dummy).isSpy()).isTrue();
     }
 
     public record DummyWithSimpleDependency(SimpleDummy simpleDummy) {

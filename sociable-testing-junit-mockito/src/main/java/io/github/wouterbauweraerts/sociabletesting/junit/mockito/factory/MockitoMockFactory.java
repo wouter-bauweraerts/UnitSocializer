@@ -15,4 +15,9 @@ public class MockitoMockFactory extends MockFactory {
     public <T> T mock(Class<T> type) {
         return Mockito.mock(type);
     }
+
+    @Override
+    public <T> T spy(T isntance) {
+        return Mockito.spy(isntance);
+    }
 }

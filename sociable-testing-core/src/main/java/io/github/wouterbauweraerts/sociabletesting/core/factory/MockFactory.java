@@ -23,4 +23,5 @@ public abstract class MockFactory {
     }
 
     public abstract <T> T mock(Class<T> type);
+    public abstract <T> T spy(T isntance);
 }
