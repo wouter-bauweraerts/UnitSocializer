@@ -1,0 +1,27 @@
+package io.github.wouterbauweraerts.unitsocializer.core.factory;
+
+import java.util.Arrays;
+
+import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
+
+public abstract class MockFactory {
+    private final MockingConfig config;
+
+    public MockFactory(MockingConfig config) {
+        this.config = config;
+    }
+
+    public <T> boolean shouldMock(Class<T> type) {
+        boolean annotatedWithOneOfAnnotationsToBeMocked = config.annotations().stream()
+                .anyMatch(a -> Arrays.stream(type.getAnnotations())
+                        .anyMatch(classAnnotation -> classAnnotation.annotationType().equals(a))
+                );
+        boolean typeShouldBeMocked = config.classes().contains(type);
+        boolean packageShouldBeMocked = config.packages().contains(type.getPackageName());
+
+        return annotatedWithOneOfAnnotationsToBeMocked || typeShouldBeMocked || packageShouldBeMocked;
+    }
+
+    public abstract <T> T mock(Class<T> type);
+    public abstract <T> T spy(T isntance);
+}

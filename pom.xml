@@ -11,9 +11,9 @@
     <name>UnitSocializer</name>
 
     <modules>
-        <module>sociable-testing-core</module>
-        <module>sociable-testing-junit-mockito</module>
-        <module>sociable-testing-jacoco</module>
+        <module>unit-socializer-core</module>
+        <module>unit-socializer-junit-mockito</module>
+        <module>unit-socializer-jacoco</module>
     </modules>
 
     <properties>
@@ -21,7 +21,7 @@
         <sonar.projectKey>wouter-bauweraerts_sociable-testing</sonar.projectKey>
         <sonar.organization>wouter-bauweraerts</sonar.organization>
         <sonar.coverage.jacoco.xmlReportPaths>
-            /home/runner/work/sociable-testing/sociable-testing/sociable-testing-jacoco/target/site/jacoco-aggregate/jacoco.xml
+            /home/runner/work/unit-socializer/unit-socializer/unit-socializer-jacoco/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -39,18 +39,18 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>sociable-testing-core</artifactId>
+                <artifactId>unit-socializer-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>sociable-testing-core</artifactId>
+                <artifactId>unit-socializer-core</artifactId>
                 <version>${project.version}</version>
                 <type>test-jar</type>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>sociable-testing-junit-mockito</artifactId>
+                <artifactId>unit-socializer-junit-mockito</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

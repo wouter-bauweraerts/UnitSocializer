@@ -1,9 +1,0 @@
-sociable-test:
-    packages:
-      - "org.springframework.data.jpa.repository"
-      - "io.github.wouterbauweraerts.sociabletesting.core.dummies.mocking.mockpackage"
-    classes:
-      - "org.springframework.web.client.RestTemplate"
-      - "io.github.wouterbauweraerts.sociabletesting.core.dummies.mocking.DummyClassToMock"
-    annotations:
-      - "io.github.wouterbauweraerts.sociabletesting.core.dummies.mocking.DummyAnnotation"

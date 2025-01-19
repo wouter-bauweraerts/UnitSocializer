@@ -1,4 +1,4 @@
-# Sociable Testing
+# UnitSocializer
 
 ## WIP
 This project is still under development and is not ready to be used just yet! 

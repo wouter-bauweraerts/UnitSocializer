@@ -1,0 +1,7 @@
+unit-socializer:
+    packages:
+      - "org.springframework.data.jpa.repository"
+    classes:
+      - "org.springframework.web.client.RestTemplate"
+    annotations:
+      - " org.springframework.stereotype.Repository"

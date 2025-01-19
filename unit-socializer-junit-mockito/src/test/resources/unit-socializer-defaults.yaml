@@ -1,0 +1,9 @@
+unit-socializer:
+    packages:
+      - "org.springframework.data.jpa.repository"
+      - "io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.mockpackage"
+    classes:
+      - "org.springframework.web.client.RestTemplate"
+      - "io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.DummyClassToMock"
+    annotations:
+      - "io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.DummyAnnotation"
