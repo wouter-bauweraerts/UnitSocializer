@@ -18,7 +18,7 @@ import io.github.wouterbauweraerts.sociabletesting.junit.mockito.extension.succe
 class CanHandleMultipleResolversAndSimpleAndPrimitiveTest {
     @TestSubject(
             typeResolvers = {
-                    @Resolve(forClass =  ConcreteType.class, use = ConcreteTypeSpecialization.class),
+                    @Resolve(forClass = ConcreteType.class, use = ConcreteTypeSpecialization.class),
                     @Resolve(forClass = DummyAbstractClassMultipleImplementations.class, use = DummyAbstractClassMultipleImplementationsImpl1.class),
                     @Resolve(forClass = DummyInterfaceMultipleImplementations.class, use = DummyInterfaceMultipleImplementationsImpl2.class)
             }
