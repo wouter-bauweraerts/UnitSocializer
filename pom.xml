@@ -31,6 +31,8 @@
         <jackson.version>2.17.2</jackson.version>
         <burningwave.version>12.65.2</burningwave.version>
         <junit-platform-launcher.version>1.11.3</junit-platform-launcher.version>
+        <instancio.version>5.2.1</instancio.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -81,6 +83,18 @@
                 <groupId>org.burningwave</groupId>
                 <artifactId>core</artifactId>
                 <version>${burningwave.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.instancio</groupId>
+                <artifactId>instancio-core</artifactId>
+                <version>${instancio.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
