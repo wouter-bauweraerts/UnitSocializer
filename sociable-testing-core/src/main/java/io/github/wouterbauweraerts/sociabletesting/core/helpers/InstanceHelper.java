@@ -52,7 +52,7 @@ public class InstanceHelper {
                 .map(this::instantiate)
                 .toArray();
 
-        T instance = typeHelper.createInstance(constructor, paramResolver);
+        T instance = mockFactory.spy(typeHelper.createInstance(constructor, paramResolver));
 
         instances.putIfAbsent(type, instance);
 
