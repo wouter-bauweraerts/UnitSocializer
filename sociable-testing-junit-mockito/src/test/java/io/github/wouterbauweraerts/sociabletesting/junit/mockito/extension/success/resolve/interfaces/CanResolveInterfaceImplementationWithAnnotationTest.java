@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.sociabletesting.core.annotations.Resolve;
 import io.github.wouterbauweraerts.sociabletesting.core.annotations.TestSubject;
-import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyAbstractClassMultipleImplementations;
-import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyAbstractClassMultipleImplementationsImpl2;
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyInterfaceMultipleImplementations;
 import io.github.wouterbauweraerts.sociabletesting.core.dummies.DummyInterfaceMultipleImplementationsImpl1;
 import io.github.wouterbauweraerts.sociabletesting.junit.mockito.annotations.SociableTest;
