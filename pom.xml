@@ -21,7 +21,7 @@
         <sonar.projectKey>wouter-bauweraerts_sociable-testing</sonar.projectKey>
         <sonar.organization>wouter-bauweraerts</sonar.organization>
         <sonar.coverage.jacoco.xmlReportPaths>
-            /home/runner/work/unit-socializer/unit-socializer/unit-socializer-jacoco/target/site/jacoco-aggregate/jacoco.xml
+            /home/runner/work/UnitSocializer/UnitSocializer/unit-socializer-jacoco/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
