@@ -8,7 +8,7 @@ import io.github.wouterbauweraerts.sociabletesting.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.sociabletesting.junit.mockito.annotations.SociableTest;
 
 @SociableTest
-public class CanInstantiateClassWithBuiltInTypeDependenciesTest {
+class CanInstantiateClassWithBuiltInTypeDependenciesTest {
     @TestSubject
     DummyWithBuiltInTypes dummy;
 
