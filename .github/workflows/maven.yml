@@ -28,6 +28,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
+        pwd
         mvn clean verify sonar:sonar
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
