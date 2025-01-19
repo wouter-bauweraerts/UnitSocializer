@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mockingDetails;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.MockingDetails;
-import org.mockito.junit.jupiter.MockitoSettings;
 
 import io.github.wouterbauweraerts.sociabletesting.core.annotations.InjectTestInstance;
 import io.github.wouterbauweraerts.sociabletesting.core.annotations.TestSubject;
