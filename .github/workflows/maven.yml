@@ -35,10 +35,6 @@ jobs:
         mvn clean verify sonar:sonar
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - uses: actions/upload-artifact@v4
-      with:
-        name: unit-socializer.jar
-        path: ./target
 
   build-pages:
     runs-on: ubuntu-latest
@@ -77,8 +73,6 @@ jobs:
       id-token: write
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
       - name: Deploy JavaDoc 🚀
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
         with:
@@ -86,4 +80,4 @@ jobs:
           java-version: 21
           project: maven
           javadoc-branch: main
-          custom-command: mvn clean site
+          custom-command: mvn clean compile site
