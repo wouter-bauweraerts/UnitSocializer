@@ -70,6 +70,7 @@ jobs:
 
   publish-javadoc:
     runs-on: ubuntu-latest
+    needs: build-java
     permissions:
       contents: read
       pages: write
