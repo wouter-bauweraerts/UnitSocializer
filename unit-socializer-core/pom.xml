@@ -5,11 +5,11 @@
     <parent>
         <groupId>io.github.wouter-bauweraerts</groupId>
         <artifactId>unit-socializer</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>unit-socializer-core</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>UnitSocializer Core</name>
 
     <dependencies>
