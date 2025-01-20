@@ -71,20 +71,16 @@ jobs:
   publish-javadoc:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      permissions:
+        contents: read
+        pages: write
+        id-token: write
     if: github.ref == 'refs/heads/main'
-    needs: build-java
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: unit-socializer.jar
-          path: ./target
       - name: Deploy JavaDoc 🚀
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           deploy-mode: artifact
-#          javadoc-branch: main
           java-version: 21
-          target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc, This can be left as nothing to generate javadocs in the root folder.
           project: maven
