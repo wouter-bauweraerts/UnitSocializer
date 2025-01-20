@@ -19,8 +19,7 @@ import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestIns
  * </p>
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since nov 20 2024
+ * @since 0.0.1
  */
 public class StringToClassDeserializer extends StdDeserializer<Class<?>> {
     /**

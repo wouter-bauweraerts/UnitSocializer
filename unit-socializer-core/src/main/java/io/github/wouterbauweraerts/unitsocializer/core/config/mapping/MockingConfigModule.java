@@ -8,8 +8,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * custom deserialization logic using {@link StringToClassDeserializer}.
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since nov 20 2024
+ * @since 0.0.1
  */
 public class MockingConfigModule extends SimpleModule {
 

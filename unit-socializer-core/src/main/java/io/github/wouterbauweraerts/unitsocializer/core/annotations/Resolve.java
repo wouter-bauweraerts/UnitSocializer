@@ -13,8 +13,7 @@ import java.lang.annotation.Target;
  * using another class, typically for dependency injection or replacement usage.
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since jan 19 2025
+ * @since 0.0.1
  */
 @Target(ANNOTATION_TYPE)
 @Retention(RUNTIME)

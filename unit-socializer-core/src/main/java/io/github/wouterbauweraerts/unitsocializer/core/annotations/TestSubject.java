@@ -16,8 +16,7 @@ import java.lang.annotation.Target;
  * {@link Resolve} objects that define which implementation should be used for a certain type during test execution.</p>
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since nov 13 2024
+ * @since 0.0.1
  */
 @Documented
 @Target(FIELD)

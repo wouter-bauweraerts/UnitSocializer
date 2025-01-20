@@ -13,8 +13,7 @@ import java.lang.annotation.Target;
  * that the field value must be used to resolve fields of the given type.
  * 
  * @author Wouter Bauweraerts
- * @since nov 21 2024
- * @version 0.0.1
+ * @since 0.0.1
  */
 @Documented
 @Target(FIELD)

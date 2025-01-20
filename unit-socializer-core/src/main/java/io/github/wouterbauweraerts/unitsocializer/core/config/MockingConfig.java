@@ -14,8 +14,7 @@ import java.util.List;
  * @param packages    A list of package names indicating the scope of mocking.
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since nov 20 2024
+ * @since 0.0.1
  */
 public record MockingConfig(
         List<Class<? extends Annotation>> annotations,

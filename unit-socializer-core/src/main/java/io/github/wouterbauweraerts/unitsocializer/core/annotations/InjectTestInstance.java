@@ -19,8 +19,7 @@ import java.lang.annotation.Target;
  * </p>
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since nov 21 2024
+ * @since 0.0.1
  */
 @Documented
 @Target(FIELD)

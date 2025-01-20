@@ -22,8 +22,7 @@ import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestIns
  * It handles the deserialization and fallback mechanisms for default configurations.
  *
  * @author Wouter Bauweraerts
- * @version 0.0.1
- * @since nov 20 2024
+ * @since 0.0.1
  */
 public class MockingConfigReader {
     /**
