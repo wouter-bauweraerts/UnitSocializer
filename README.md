@@ -33,48 +33,6 @@ just because they aren't bound to the implementation.
 There is still some mocking or stubbing available, but only for controlling interactions with external systems,
 systems that are out of our control.
 
-[//]: # (Writing tests can be a hard job. Especially when you want to write good tests.)
-
-[//]: # (I often see unit tests that don't test what they should be testing. Tests should focus on testing **behavior**, )
-
-[//]: # (instead of testing that the current implementation is technically correct.)
-
-[//]: # (Why? We want to know that a feature works as it should be working. We want to know that for the current code, )
-
-[//]: # (but preferably we want this test to validate that our feature still behaves as it was initially developed &#40;and validated&#41;.)
-
-[//]: # ()
-[//]: # (To be able to do so, we want to avoid using mocks too much. )
-
-[//]: # (And this is the root cause of a problem many projects face nowadays. )
-
-[//]: # (Many developers &#40;especially starters&#41; don't know how to write a proper unit test anymore! )
-
-[//]: # (They don't care about the fact that their test will break if someone else refactors their code!)
-
-[//]: # ()
-[//]: # (Or maybe they do care, but they don't want to do the effort of writing a decent test. )
-
-[//]: # (As long as the code is covered by a test and my coverage goals are met, it's all good!)
-
-[//]: # ()
-[//]: # (I'm not a fan of this mentality. I want my test to work, and I want it to keep working &#40;unless someone breaks the feature obviously&#41;!)
-
-[//]: # (To improve my tests I started reading about **Sociable Unit Tests**. If you don't know them, make sure to read [this post written by Martin Fowler]&#40;https://martinfowler.com/bliki/UnitTest.html&#41;.)
-
-[//]: # (Disregarding the fact that I like the concept of sociable tests a lot, )
-
-[//]: # (I find them hard to write, especially in large scale projects.)
-
-[//]: # ()
-[//]: # (Why is that? I don't want my sociable unit tests to have the same setup as my integration tests. )
-
-[//]: # (If I'm using an application framework &#40;Quarkus, Spring-Boot, ...&#41; for my application, )
-
-[//]: # (I don't want to have to spin up the application context to run my **unit** tests!)
-
-[//]: # (That's why I started this project!)
-
 ## Usage
 Please check the documentation site for a detailed usage description. (WIP: page does not exist yet)
 To start using the project, please add the following to your pom.xml (Maven users)
