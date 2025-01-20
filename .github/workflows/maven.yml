@@ -85,5 +85,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           java-version: 21
           project: maven
-          branch: main
+          javadoc-branch: main
           custom-command: mvn clean site
