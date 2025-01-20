@@ -5,12 +5,14 @@
     <parent>
         <groupId>io.github.wouter-bauweraerts</groupId>
         <artifactId>unit-socializer</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>unit-socializer-jacoco</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>UnitSocializer JaCoCo</name>
+    <description>JaCoCo aggregation module</description>
+    <url>${project.parent.url}/uc-jacoco</url>
 
     <dependencies>
         <dependency>

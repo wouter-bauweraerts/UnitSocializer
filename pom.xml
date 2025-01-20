@@ -4,7 +4,7 @@
 
     <groupId>io.github.wouter-bauweraerts</groupId>
     <artifactId>unit-socializer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>pom</packaging>
 
     <name>UnitSocializer</name>
@@ -190,6 +190,7 @@
                     <groupId>org.jreleaser</groupId>
                     <artifactId>jreleaser-maven-plugin</artifactId>
                     <version>1.16.0</version>
+                    <inherited>false</inherited>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -229,6 +230,7 @@
             <plugin>
                 <groupId>org.jreleaser</groupId>
                 <artifactId>jreleaser-maven-plugin</artifactId>
+                <inherited>false</inherited>
                 <configuration>
                     <jreleaser>
                         <signing>
@@ -237,16 +239,13 @@
                         </signing>
                         <deploy>
                             <maven>
-                                <nexus2>
-                                    <maven-central>
+                                <mavenCentral>
+                                    <sonatype>
                                         <active>ALWAYS</active>
-                                        <url>https://s01.oss.sonatype.org/service/local</url>
-                                        <snapshotUrl>https://s01.oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
-                                        <closeRepository>true</closeRepository>
-                                        <releaseRepository>true</releaseRepository>
+                                        <url>https://central.sonatype.com/api/v1/publisher</url>
                                         <stagingRepositories>target/staging-deploy</stagingRepositories>
-                                    </maven-central>
-                                </nexus2>
+                                    </sonatype>
+                                </mavenCentral>
                             </maven>
                         </deploy>
                     </jreleaser>
