@@ -10,6 +10,27 @@
 
     <name>UnitSocializer</name>
 
+    <developers>
+        <developer>
+            <name>Wouter Bauweraerts</name>
+            <url>https://github.com/wouter-bauweraerts</url>
+        </developer>
+    </developers>
+
+    <url>https://wouter-bauweraerts.github.io/UnitSocializer/</url>
+
+    <scm>
+        <url>https://github.com/wouter-bauweraerts/UnitSocializer</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/mit</url>
+            <comments>Copyright 2025 Wouter Bauweraerts</comments>
+        </license>
+    </licenses>
+
     <modules>
         <module>unit-socializer-core</module>
         <module>unit-socializer-junit-mockito</module>
