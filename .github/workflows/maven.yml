@@ -40,7 +40,6 @@ jobs:
         name: unit-socializer.jar
         path: ./target
 
-  # Build job
   build-pages:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -57,7 +56,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
-  # Deployment job
   deploy-pages:
     environment:
       name: github-pages
@@ -73,7 +71,7 @@ jobs:
   publish-javadoc:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # if you have a protection rule on your repository, you'll need to give write permission to the workflow.
+      contents: write
     if: github.ref == 'refs/heads/main'
     needs: build-java
     steps:
@@ -85,7 +83,8 @@ jobs:
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: main
+          deploy-mode: artifact
+#          javadoc-branch: main
           java-version: 21
           target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc, This can be left as nothing to generate javadocs in the root folder.
-          project: maven # or gradle
+          project: maven
