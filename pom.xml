@@ -21,7 +21,7 @@
 
     <scm>
         <url>https://github.com/wouter-bauweraerts/UnitSocializer</url>
-        <developerConnection>scm:git@github.com:wouter-bauweraerts/UnitSocializer.git </developerConnection>
+        <developerConnection>scm:git:https://github.com/wouter-bauweraerts/UnitSocializer.git</developerConnection>
     </scm>
 
     <licenses>
