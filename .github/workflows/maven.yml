@@ -83,6 +83,7 @@ jobs:
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          deploy-mode: artifact
           java-version: 21
           project: maven
+          branch: main
+          custom-command: mvn clean site
