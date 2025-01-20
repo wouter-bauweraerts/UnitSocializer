@@ -7,11 +7,11 @@
     <parent>
         <groupId>io.github.wouter-bauweraerts</groupId>
         <artifactId>unit-socializer</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>unit-socializer-jacoco</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${project.parent.version}</version>
     <name>UnitSocializer JaCoCo</name>
 
     <dependencies>
