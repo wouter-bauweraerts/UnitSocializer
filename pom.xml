@@ -17,6 +17,7 @@
     </developers>
 
     <url>https://wouter-bauweraerts.github.io/UnitSocializer/</url>
+    <inceptionYear>2025</inceptionYear>
 
     <scm>
         <url>https://github.com/wouter-bauweraerts/UnitSocializer</url>
@@ -56,8 +57,10 @@
         <sonar.coverage.jacoco.xmlReportPaths>
             /home/runner/work/UnitSocializer/UnitSocializer/unit-socializer-jacoco/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
+
         <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
 
         <junit.version>5.11.4</junit.version>
         <mockito.version>5.15.2</mockito.version>
@@ -243,15 +246,6 @@
                                         <stagingRepositories>target/staging-deploy</stagingRepositories>
                                     </maven-central>
                                 </nexus2>
-                                <!-- Portal Publisher API
-                                <mavenCentral>
-                                    <sonatype>
-                                        <active>ALWAYS</active>
-                                        <url>https://central.sonatype.com/api/v1/publisher</url>
-                                        <stagingRepositories>target/staging-deploy</stagingRepositories>
-                                    </sonatype>
-                                </mavenCentral>
-                                -->
                             </maven>
                         </deploy>
                     </jreleaser>
