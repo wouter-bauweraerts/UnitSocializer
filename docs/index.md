@@ -114,4 +114,4 @@ If you encounter an issue of if you're missing an (important) feature,
 please [submit a GitHub Issue](https://github.com/wouter-bauweraerts/UnitSocializer/issues)
 
 ## License
-[MIT](../LICENSE) ©2025 Wouter Bauweraerts
+[MIT](https://github.com/wouter-bauweraerts/UnitSocializer/blob/b103c55c3e7b1bd1617035b37da96cca051b4da7/LICENSE){:target="_blank"} ©2025 Wouter Bauweraerts
