@@ -4,7 +4,7 @@
 
     <groupId>io.github.wouter-bauweraerts</groupId>
     <artifactId>unit-socializer</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>UnitSocializer</name>
@@ -24,7 +24,7 @@
         <url>https://github.com/wouter-bauweraerts/UnitSocializer</url>
         <connection>scm:git:ssh:git@github.com/wouter-bauweraerts/UnitSocializer.git</connection>
         <developerConnection>scm:git:ssh:git@github.com/wouter-bauweraerts/UnitSocializer.git</developerConnection>
-      <tag>v0.0.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <licenses>
