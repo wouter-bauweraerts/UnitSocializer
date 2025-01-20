@@ -11,6 +11,7 @@
     <artifactId>unit-socializer-junit-mockito</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>UnitSocializer jUnit-Mockito</name>
+    <description>UnitSocializer jUnit Mockito library</description>
 
     <properties>
     </properties>

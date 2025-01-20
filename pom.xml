@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
 
     <name>UnitSocializer</name>
+    <description>Parent project for UnitSocializer libraries</description>
 
     <developers>
         <developer>
