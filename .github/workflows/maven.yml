@@ -71,10 +71,9 @@ jobs:
   publish-javadoc:
     runs-on: ubuntu-latest
     permissions:
-      permissions:
-        contents: read
-        pages: write
-        id-token: write
+      contents: read
+      pages: write
+      id-token: write
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Download artifact
