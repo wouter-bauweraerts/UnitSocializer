@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            {% for item in site.data.nav.toc %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {{ item.title }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for subitem in item.subfolderitems %}
+                    <a class="dropdown-item" href="{{subitem.url}}">{{subitem.page}}</a>
+                    {% endfor %}
+                </div>
+            </li>
+            {% endfor %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="javadoc-dropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    JavaDoc
+                </a>
+                <div class="dropdown-menu" aria-labelledby="javadoc-dropdown">
+                    <a class="dropdown-item" href="https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-core/latest/index.html" target="_blank">Core</a>
+                    <a class="dropdown-item" href="https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html" target="_blank">jUnit-Mockito</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

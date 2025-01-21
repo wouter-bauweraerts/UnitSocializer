@@ -1,3 +1,17 @@
 toc:
-  - name: Home
-    url: index
+- title: Core
+  subfolderitems:
+  - page: Classpath Scanning
+    url: /modules/core/classpath-scanning
+  - page: Inject
+    url: /modules/core/inject
+  - page: Mock-Configuration
+    url: /modules/core/mock-configuration
+  - page: Predefined
+    url: /modules/core/predefined
+  - page: Resolve
+    url: /modules/core/resolve
+- title: jUnit-Mockito
+  subfolderitems:
+  - page: Module Info
+    url: /modules/junit-mockito/us-junit-mockito
