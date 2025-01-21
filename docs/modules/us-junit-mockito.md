@@ -93,8 +93,8 @@ This minimal setup will also work if your class has dependencies on concrete imp
 If you need to configure components that you want to mock, check the [mock configuration example](./core/mock-configuration)
 
 #### More examples
-- Using predefined values in your test
-- Resolving abstract types
+- [Using predefined values in your test](./core/predefined)
+- [Resolving abstract types](./core/resolve)
 - Injecting generated dependencies in your test
 
 ## JavaDoc

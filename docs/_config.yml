@@ -3,5 +3,5 @@ plugins:
   - jekyll-remote-theme
 
 title: UnitSocializer
-description: UnitSocializer usage documentation
+description: Simplify your sociable tests with minimal effort!
 show_downloads: false
