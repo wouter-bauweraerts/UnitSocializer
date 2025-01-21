@@ -98,7 +98,7 @@ The project is a multi-module project.
 Not all module is suitable for direct use, but they are reused within other modules, to avoid code duplication.
 - unit-socializer-jacoco
     - Not intended to be used. Aggregates coverage data
-- unit-socializer-core
+- unit-socializer-core [JavaDoc](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-core/latest/index.html){:target="_blank"}
   - Not intended for separate use.
   - Backbone of the testing framework
   - Provides core features, which are reused in other modules

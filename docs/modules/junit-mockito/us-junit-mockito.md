@@ -98,4 +98,4 @@ If you need to configure components that you want to mock, check the [mock confi
 - [Injecting generated instances](../core/inject)
 
 ## JavaDoc
-Latest JavaDoc can be found [here](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html)
+Latest JavaDoc can be found [here](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html){:target="_blank"}
