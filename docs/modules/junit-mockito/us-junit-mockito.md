@@ -23,7 +23,7 @@ I guarantee that it works with this version, using other versions may or may not
 | 0.0.2          | 5.11.4        | 5.15.2  |
 
 ### Usage
-The UnistSocializer jUnit-Mockito module provides a Sociable Test extension built upon jUnit 5.
+The UnitSocializer jUnit-Mockito module provides a Sociable Test extension built upon jUnit 5.
 All you have to do to make your test use this extension, is annotate your test class with the `@SociableTest` annotation.
 
 The `@SociableTest` annotation also requires an `@TestSubject` annotated field to be present in your test.
@@ -90,12 +90,12 @@ class ShippingCostCalculatorTest {
 }
 ```
 This minimal setup will also work if your class has dependencies on concrete implementations.
-If you need to configure components that you want to mock, check the [mock configuration example](./core/mock-configuration)
+If you need to configure components that you want to mock, check the [mock configuration example](../core/mock-configuration)
 
 #### More examples
-- [Using predefined values in your test](./core/predefined)
-- [Resolving abstract types](./core/resolve)
-- [Injecting generated dependencies in your test](./core/inject)
+- [Using predefined values in your test](../core/predefined)
+- [Resolving types](../core/resolve)
+- [Injecting generated dependencies in your test](../core/inject)
 
 ## JavaDoc
 JavaDoc can be found [here](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html)

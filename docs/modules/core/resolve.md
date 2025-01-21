@@ -1,4 +1,4 @@
-## Resolving subtypes
+## Resolving types
 
 Very often you don't want your code to rely on specific implementations, 
 you inject an interface or abstract type instead of a concrete implementation.

@@ -102,7 +102,7 @@ Not all module is suitable for direct use, but they are reused within other modu
   - Not intended for separate use.
   - Backbone of the testing framework
   - Provides core features, which are reused in other modules
-- [unit-socializer-junit-mockito](modules/us-junit-mockito.md)
+- [unit-socializer-junit-mockito](modules/junit-mockito/us-junit-mockito.md)
 
 ## Releases
 
