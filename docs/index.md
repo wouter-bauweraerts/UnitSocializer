@@ -77,16 +77,16 @@ When you start your tests, the framework detects which class you are testing via
 We use **reflection** to investigate how we can instantiate this class and which dependencies it needs.
 We instantiate the class and all of its dependencies.
 We **avoid using mocks**, however some components will need to be mocked.
-You can easily [configure](./mock-config) what needs to be mocked by adding a `unit-socializer.yaml` file in the root of your resources folder.
+You can easily [configure](./modules/core/mock-configuration) what needs to be mocked by adding a `unit-socializer.yaml` file in the root of your resources folder.
 
-You can easily add [predefined instances](./predefined) to your test context, which will be used while creating your test unit.
+You can easily add [predefined instances](modules/core/predefined.md) to your test context, which will be used while creating your test unit.
 
-We also provide the possibility to [inject a reference to a dependency within your testing unit.](./inject-test-instance)
+We also provide the possibility to [inject a reference to a dependency within your testing unit.](modules/core/inject-test-instance.md)
 
 In Object-Oriented programming, we have the concept of inheritance. 
 T his is something we address on two ways.
 - Classpath scanning for classes that implement a given interface or extend a given (abstract) class.
-- Because classpath scanning is an expensive operation, we also provide the possibility to [preconfigure](./resolve) which specific type needs to be used for a given supertype.
+- Because classpath scanning is an expensive operation, we also provide the possibility to [preconfigure](modules/core/resolve.md) which specific type needs to be used for a given supertype.
 
 ## Modules
 The project is a multi-module project. 
@@ -97,7 +97,7 @@ Not all module is suitable for direct use, but they are reused within other modu
   - Not intended for separate use.
   - Backbone of the testing framework
   - Provides core features, which are reused in other modules
-- [unit-socializer-junit-mockito](./us-junit-mockito)
+- [unit-socializer-junit-mockito](modules/us-junit-mockito.md)
 
 ## Releases
 

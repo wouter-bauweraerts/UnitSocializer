@@ -89,6 +89,8 @@ class ShippingCostCalculatorTest {
     // shippingCostSource method omitted
 }
 ```
+This minimal setup will also work if your class has dependencies on concrete implementations.
+If you need to configure components that you want to mock, check the [mock configuration example](./core/mock-configuration)
 
 #### More examples
 - Using predefined values in your test
