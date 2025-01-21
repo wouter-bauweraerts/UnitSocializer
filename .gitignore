@@ -374,3 +374,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Github pages - documentation
+**/Gemfile.lock
+**/_site
+**/.sass-cache
+**/.bundle
+**/vendor/
