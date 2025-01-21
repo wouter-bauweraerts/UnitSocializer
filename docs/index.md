@@ -1,3 +1,8 @@
+---
+title: UnitSocializer - Home
+sidebar: toc
+---
+
 # UnitSocializer
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wouter-bauweraerts_sociable-testing&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wouter-bauweraerts_sociable-testing)
