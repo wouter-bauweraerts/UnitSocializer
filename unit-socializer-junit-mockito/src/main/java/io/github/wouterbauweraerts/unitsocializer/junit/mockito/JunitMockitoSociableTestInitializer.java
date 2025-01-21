@@ -1,6 +1,7 @@
 package io.github.wouterbauweraerts.unitsocializer.junit.mockito;
 
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
+import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.unitsocializer.core.extension.BeforeEachCallbackHandler;
 import io.github.wouterbauweraerts.unitsocializer.core.factory.TypeHelper;
@@ -18,6 +19,8 @@ import io.github.wouterbauweraerts.unitsocializer.junit.mockito.factory.MockitoM
  * @since 0.0.1
  */
 public class JunitMockitoSociableTestInitializer {
+    private static final String DEFAULT_CONFIG_FILE_NAME = "unit-socializer-defaults-junit-mockito.yaml";
+
     private JunitMockitoSociableTestInitializer() {
         // This is a utility class. Should not be instantiated
     }
@@ -49,5 +52,9 @@ public class JunitMockitoSociableTestInitializer {
                 ctx,
                 instanceFactory(config)
         );
+    }
+
+    public static MockingConfigReader configReader() {
+        return new MockingConfigReader(DEFAULT_CONFIG_FILE_NAME);
     }
 }

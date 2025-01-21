@@ -6,9 +6,6 @@ import static java.util.Optional.ofNullable;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -22,18 +19,13 @@ import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestIns
 
 
 /**
- * Utility class for loading the mocking configuration from YAML files.
+ * Class for loading the mocking configuration from YAML files.
  * It handles the deserialization and fallback mechanisms for default configurations.
  *
  * @author Wouter Bauweraerts
  * @since 0.0.1
  */
 public class MockingConfigReader {
-    /**
-     * Name of the file containing the default configuration values.
-     * This file is provided by the library and can be overwritten by adding your own configuration in unit-socializer-config.yaml
-     */
-    private static final String DEFAULT_RESOURCE_NAME = "unit-socializer-defaults.yaml";
     /**
      * Name of the primary configuration file that is attempted to load first.
      * This file contains the configuration that is provided by the user.
@@ -50,12 +42,13 @@ public class MockingConfigReader {
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
             .readerFor(MockingConfig.class)
             .withRootName("unit-socializer");
+    private final String defaultConfigFileName;
 
     /**
-     * Private constructor to prevent instantiation of this utility class.
+     * constructor with default configuration file name
      */
-    private MockingConfigReader() {
-        // Utility class should not be instantiated
+    public MockingConfigReader(String defaultConfigFileName) {
+        this.defaultConfigFileName = defaultConfigFileName;
     }
 
     /**
@@ -67,11 +60,11 @@ public class MockingConfigReader {
      * @throws SociableTestInstantiationException if none of the configuration files are found
      *         or an error occurs during file reading or parsing.
      */
-    public static MockingConfig loadConfig() {
+    public MockingConfig loadConfig() {
         ClassLoader classLoader = MockingConfigReader.class.getClassLoader();
         InputStream config = classLoader.getResourceAsStream(RESOURCE_NAME);
         if (Objects.isNull(config)) {
-            config = classLoader.getResourceAsStream(DEFAULT_RESOURCE_NAME);
+            config = classLoader.getResourceAsStream(defaultConfigFileName);
         }
     
         if (Objects.isNull(config)) {

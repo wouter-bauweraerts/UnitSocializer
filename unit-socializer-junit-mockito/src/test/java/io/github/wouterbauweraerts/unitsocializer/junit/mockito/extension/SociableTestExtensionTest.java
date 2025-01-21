@@ -21,7 +21,6 @@ import io.github.wouterbauweraerts.unitsocializer.core.util.ReflectionUtil;
 
 @ExtendWith(MockitoExtension.class)
 class SociableTestExtensionTest {
-
     @InjectMocks
     SociableTestExtension extension;
     @Mock

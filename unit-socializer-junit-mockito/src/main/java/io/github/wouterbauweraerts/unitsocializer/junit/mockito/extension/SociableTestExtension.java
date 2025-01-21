@@ -22,7 +22,6 @@ import io.github.wouterbauweraerts.unitsocializer.junit.mockito.JunitMockitoSoci
  * @since 0.0.1
  */
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
-
     private final SociableTestContext sociableTestContext;
     private final BeforeEachCallbackHandler beforeEachCallbackHandler;
 
@@ -35,7 +34,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
      */
     public SociableTestExtension() {
         sociableTestContext = SociableTestContext.getInstance();
-        MockingConfig mockingConfig = MockingConfigReader.loadConfig();
+        MockingConfig mockingConfig = JunitMockitoSociableTestInitializer.configReader().loadConfig();
         beforeEachCallbackHandler = JunitMockitoSociableTestInitializer.beforeEachCallbackHandler(sociableTestContext, mockingConfig);
     }
 
