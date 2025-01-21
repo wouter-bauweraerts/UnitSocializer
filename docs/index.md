@@ -102,9 +102,9 @@ Not all module is suitable for direct use, but they are reused within other modu
 ## Releases
 
 | Version | Release Date |
-|---------|--------------|
-| 0.0.1   | Jan 20 2025  |
-| 0.0.12  | Jan 21 2025  |
+|--------|--------------|
+| 0.0.1  | Jan 20 2025  |
+| 0.0.2  | Jan 21 2025  |
 
 
 ## Changelog
