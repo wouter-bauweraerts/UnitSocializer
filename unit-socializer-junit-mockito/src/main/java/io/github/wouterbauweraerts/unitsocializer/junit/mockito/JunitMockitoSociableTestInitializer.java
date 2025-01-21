@@ -54,6 +54,11 @@ public class JunitMockitoSociableTestInitializer {
         );
     }
 
+    /**
+     * Creates an {@link MockingConfigReader} with the desired default config filename.
+     *
+     * @return an {@code MocingConfigReader} for loading mocking configuration with fallback to default configuration file
+     */
     public static MockingConfigReader configReader() {
         return new MockingConfigReader(DEFAULT_CONFIG_FILE_NAME);
     }
