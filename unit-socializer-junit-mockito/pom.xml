@@ -5,14 +5,14 @@
     <parent>
         <groupId>io.github.wouter-bauweraerts</groupId>
         <artifactId>unit-socializer</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>unit-socializer-junit-mockito</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>UnitSocializer jUnit-Mockito</name>
     <description>UnitSocializer jUnit Mockito library</description>
-    <url>${project.parent.url}/uc-junit-mockito</url>
+    <url>https://wouter-bauweraerts.github.io/UnitSocializer/us-junit-mockito</url>
 
     <properties>
     </properties>
