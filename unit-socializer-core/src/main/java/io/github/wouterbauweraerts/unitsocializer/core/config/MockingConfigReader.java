@@ -3,10 +3,14 @@ package io.github.wouterbauweraerts.unitsocializer.core.config;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -65,24 +69,24 @@ public class MockingConfigReader {
      */
     public static MockingConfig loadConfig() {
         ClassLoader classLoader = MockingConfigReader.class.getClassLoader();
-        URL config = classLoader.getResource(RESOURCE_NAME);
+        InputStream config = classLoader.getResourceAsStream(RESOURCE_NAME);
         if (Objects.isNull(config)) {
-            config = classLoader.getResource(DEFAULT_RESOURCE_NAME);
+            config = classLoader.getResourceAsStream(DEFAULT_RESOURCE_NAME);
         }
     
         if (Objects.isNull(config)) {
             throw new SociableTestInstantiationException("Could not find configuration!");
         }
-    
-        try {
-            if (Files.size(Paths.get(config.toURI())) == 0) {
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(config))) {
+            String configurationContent = br.lines().collect(Collectors.joining("\n"));
+            if (configurationContent.isEmpty()) {
                 return new MockingConfig(emptyList(), emptyList(), emptyList());
             }
-                return filterNulls(yamlMapper.readValue(config, MockingConfig.class));
+            return filterNulls(yamlMapper.readValue(configurationContent, MockingConfig.class));
         } catch (Exception e) {
             throw new SociableTestInstantiationException("Exception while loading config", e);
         }
-    
     }
 
     /**
