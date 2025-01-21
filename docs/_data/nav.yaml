@@ -2,16 +2,16 @@ toc:
 - title: Core
   subfolderitems:
   - page: Classpath Scanning
-    url: /modules/core/classpath-scanning
+    url: /UnitSocializer/modules/core/classpath-scanning
   - page: Inject
-    url: /modules/core/inject
+    url: /UnitSocializer/modules/core/inject
   - page: Mock-Configuration
-    url: /modules/core/mock-configuration
+    url: /UnitSocializer/modules/core/mock-configuration
   - page: Predefined
-    url: /modules/core/predefined
+    url: /UnitSocializer/modules/core/predefined
   - page: Resolve
-    url: /modules/core/resolve
+    url: /UnitSocializer/modules/core/resolve
 - title: jUnit-Mockito
   subfolderitems:
   - page: Module Info
-    url: /modules/junit-mockito/us-junit-mockito
+    url: /UnitSocializer/modules/junit-mockito/us-junit-mockito
