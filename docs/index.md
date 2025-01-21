@@ -101,15 +101,19 @@ Not all module is suitable for direct use, but they are reused within other modu
 
 ## Releases
 
-| Version | Release Date     |
-|---------|------------------|
-| 0.0.1   | Not released yet |
+| Version | Release Date |
+|---------|--------------|
+| 0.0.1   | Jan 20 2025  |
+| 0.0.12  | Jan 21 2025  |
 
 
 ## Changelog
 ### 0.0.1
 - Initial setup and MVP functionality
 - Includes module unit-socializer-junit-mockito
+
+### 0.0.2
+- Include default config in jar
 
 ## Problems / Feature Requests
 If you encounter an issue of if you're missing an (important) feature,

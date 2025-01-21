@@ -26,6 +26,7 @@
             <groupId>io.github.wouter-bauweraerts</groupId>
             <artifactId>unit-socializer-core</artifactId>
             <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
