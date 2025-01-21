@@ -15,6 +15,7 @@ Watch this project and or follow me on social media for updates:
 - [Related efforts](#related-efforts)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
+- [Development](#development)
 - [Build status](#build-status)
 - [Sonarcloud status](#sonarcloud-status)
 - [License](#license)
@@ -48,15 +49,29 @@ To start using the project, please add the following to your pom.xml (Maven user
 [//]: # (TODO add the correct link!)
 Check [the Maven Central Repository](https://central.sonatype.com/artifact/io.github.wouter-bauweraerts/instancio-fixture-builder) for the most recent version.
 There you can also find how to include it with different build systems.
+
 ## Related efforts
 - [Instancio Fixture Builder](https://wouter-bauweraerts.github.io/instancio-fixture-builder/)
+
 ## Maintainers
 - [Wouter Bauweraerts](https://github.com/wouter-bauweraerts)
+
 ## Contributing
 Feel free to dive in! Missing a feature of encountering a problem? Feel free to open an issue!
 Want to contribute? Contact us!
+
 ## Build status
 ![GH Build status](https://github.com/wouter-bauweraerts/UnitSocializer/actions/workflows/maven.yml/badge.svg)
+
+## Development
+- Build and debug the site locally:
+    - make sure ruby is installed (min 3.3.5)
+    - make sure bundle is present
+    - make sure jekyll is installed
+    - cd into docs
+    - run `bundle install --path=vendor/bundle` to build
+    - run `bundle exec jekyll s -l -o` to serve the site with livereload and open in a browser
+
 ## Sonarcloud status
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wouter-bauweraerts_sociable-testing&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wouter-bauweraerts_sociable-testing)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=wouter-bauweraerts_sociable-testing&metric=coverage)](https://sonarcloud.io/summary/new_code?id=wouter-bauweraerts_sociable-testing)
