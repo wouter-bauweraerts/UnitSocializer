@@ -3,12 +3,6 @@ title: UnitSocializer - Home
 sidebar: toc
 ---
 
-# UnitSocializer
-
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=wouter-bauweraerts_sociable-testing&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wouter-bauweraerts_sociable-testing)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=wouter-bauweraerts_sociable-testing&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=wouter-bauweraerts_sociable-testing)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=wouter-bauweraerts_sociable-testing&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=wouter-bauweraerts_sociable-testing)
-
 ## Context
 Writing tests can be a hard job. Especially when you want to write good tests.
 I often see unit tests that don't test what they should be testing. Tests should focus on testing **behavior**, 
