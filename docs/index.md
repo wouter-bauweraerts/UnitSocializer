@@ -86,7 +86,7 @@ You can easily [configure](./modules/core/mock-configuration) what needs to be m
 
 You can easily add [predefined instances](modules/core/predefined.md) to your test context, which will be used while creating your test unit.
 
-We also provide the possibility to [inject a reference to a dependency within your testing unit.](modules/core/inject-test-instance.md)
+We also provide the possibility to [inject a reference to a dependency within your testing unit.](modules/core/inject.md)
 
 In Object-Oriented programming, we have the concept of inheritance. 
 T his is something we address on two ways.
@@ -102,7 +102,7 @@ Not all module is suitable for direct use, but they are reused within other modu
   - Not intended for separate use.
   - Backbone of the testing framework
   - Provides core features, which are reused in other modules
-- [unit-socializer-junit-mockito](modules/junit-mockito/us-junit-mockito.md)
+- [unit-socializer-junit-mockito](./modules/junit-mockito/us-junit-mockito)
 
 ## Releases
 
