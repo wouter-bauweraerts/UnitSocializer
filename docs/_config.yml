@@ -5,3 +5,5 @@ plugins:
 title: UnitSocializer
 description: Simplify your sociable tests with minimal effort!
 show_downloads: false
+sass:
+  style: compressed
