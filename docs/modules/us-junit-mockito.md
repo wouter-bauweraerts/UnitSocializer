@@ -95,7 +95,7 @@ If you need to configure components that you want to mock, check the [mock confi
 #### More examples
 - [Using predefined values in your test](./core/predefined)
 - [Resolving abstract types](./core/resolve)
-- Injecting generated dependencies in your test
+- [Injecting generated dependencies in your test](./core/inject)
 
 ## JavaDoc
 JavaDoc can be found [here](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html)
