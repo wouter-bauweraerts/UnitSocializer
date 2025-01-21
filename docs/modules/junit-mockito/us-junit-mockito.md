@@ -93,9 +93,9 @@ This minimal setup will also work if your class has dependencies on concrete imp
 If you need to configure components that you want to mock, check the [mock configuration example](../core/mock-configuration)
 
 #### More examples
-- [Using predefined values in your test](../core/predefined)
+- [Using predefined values](../core/predefined)
 - [Resolving types](../core/resolve)
-- [Injecting generated dependencies in your test](../core/inject)
+- [Injecting generated instances](../core/inject)
 
 ## JavaDoc
-JavaDoc can be found [here](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html)
+Latest JavaDoc can be found [here](https://www.javadoc.io/doc/io.github.wouter-bauweraerts/unit-socializer-junit-mockito/latest/index.html)
