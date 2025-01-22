@@ -12,7 +12,7 @@ To use UnitSocializer jUnit-Mockito, you will need to add only one dependency!
     <scope>test</scope>
 </dependency>
 ```
-Please check [Maven Central Repository](https://central.sonatype.com/artifact/io.github.wouter-bauweraerts/unit-socializer-junit-mockito) for the latest release version!
+Please check [Maven Central Repository](https://central.sonatype.com/artifact/io.github.wouter-bauweraerts/unit-socializer-junit-mockito){:target="_blank"} for the latest release version!
 
 ### Compatibility info
 The unit-socializer-junit-mockito module requires dependencies on jUnit and Mockito.

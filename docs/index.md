@@ -19,7 +19,7 @@ Or maybe they do care, but they don't want to do the effort of writing a decent 
 As long as the code is covered by a test and my coverage goals are met, it's all good!
 
 I'm not a fan of this mentality. I want my test to work, and I want it to keep working (unless someone breaks the feature obviously)!
-To improve my tests I started reading about **Sociable Unit Tests**. If you don't know them, make sure to read [this post written by Martin Fowler](https://martinfowler.com/bliki/UnitTest.html).
+To improve my tests I started reading about **Sociable Unit Tests**. If you don't know them, make sure to read [this post written by Martin Fowler](https://martinfowler.com/bliki/UnitTest.html){:target="_blank"}.
 Disregarding the fact that I like the concept of sociable tests a lot, 
 I find them hard to write, especially in large scale projects.
 
@@ -116,7 +116,7 @@ Not all module is suitable for direct use, but they are reused within other modu
 
 ## Problems / Feature Requests
 If you encounter an issue of if you're missing an (important) feature,
-please [submit a GitHub Issue](https://github.com/wouter-bauweraerts/UnitSocializer/issues)
+please [submit a GitHub Issue](https://github.com/wouter-bauweraerts/UnitSocializer/issues){:target="_blank"}
 
 ## License
 [MIT](https://github.com/wouter-bauweraerts/UnitSocializer/blob/b103c55c3e7b1bd1617035b37da96cca051b4da7/LICENSE){:target="_blank"} ©2025 Wouter Bauweraerts
