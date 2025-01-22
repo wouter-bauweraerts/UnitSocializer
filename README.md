@@ -42,13 +42,15 @@ To start using the project, please add the following to your pom.xml (Maven user
 <dependency>
     <groupId>io.github.wouter-bauweraerts</groupId>
     <artifactId>sociable-testing-junit-mockito</artifactId>
-    <version>1.0</version> <!-- TODO nothing released yet! -->
+    <version>0.0.3</version>
 </dependency>
 ```
 
-[//]: # (TODO add the correct link!)
-Check [the Maven Central Repository](https://central.sonatype.com/artifact/io.github.wouter-bauweraerts/instancio-fixture-builder){:target="_blank"} for the most recent version.
+[//]:
+Check the Maven Central Repository for the most recent version.
 There you can also find how to include it with different build systems.
+- [Core module](https://central.sonatype.com/artifact/io.github.wouter-bauweraerts/unit-socializer-core){:target="_blank"}
+- [jUnit-Mockito module](https://central.sonatype.com/artifact/io.github.wouter-bauweraerts/unit-socializer-junit-mockito){:target="_blank"} 
 
 ## Related efforts
 - [Instancio Fixture Builder](https://wouter-bauweraerts.github.io/instancio-fixture-builder/){:target="_blank"}
