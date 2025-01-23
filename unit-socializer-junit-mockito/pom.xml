@@ -12,7 +12,7 @@
     <version>0.0.4-SNAPSHOT</version>
     <name>UnitSocializer jUnit-Mockito</name>
     <description>UnitSocializer jUnit Mockito library</description>
-    <url>https://wouter-bauweraerts.github.io/UnitSocializer/us-junit-mockito</url>
+    <url>https://wouter-bauweraerts.github.io/UnitSocializer</url>
 
     <properties>
     </properties>

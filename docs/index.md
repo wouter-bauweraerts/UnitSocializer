@@ -71,7 +71,7 @@ Check the specific [module page](#modules) for usage details.
 ## How does it work
 This framework simplifies the setup of Sociable Unit Tests by providing extensions for testing frameworks.
 It allows you to easily setup a sociable test by simply adding some annotations to configure your test setup.
-When you start your tests, the framework detects which class you are testing via te `@TestSubject` annotation.
+When you start your tests, the framework detects which class you are testing via the `@TestSubject` annotation.
 
 We use **reflection** to investigate how we can instantiate this class and which dependencies it needs.
 We instantiate the class and all of its dependencies.
@@ -83,7 +83,7 @@ You can easily add [predefined instances](modules/core/predefined.md) to your te
 We also provide the possibility to [inject a reference to a dependency within your testing unit.](modules/core/inject.md)
 
 In Object-Oriented programming, we have the concept of inheritance. 
-T his is something we address on two ways.
+This is something we address on two ways.
 - Classpath scanning for classes that implement a given interface or extend a given (abstract) class.
 - Because classpath scanning is an expensive operation, we also provide the possibility to [preconfigure](modules/core/resolve.md) which specific type needs to be used for a given supertype.
 
@@ -101,18 +101,24 @@ Not all module is suitable for direct use, but they are reused within other modu
 ## Releases
 
 | Version | Release Date |
-|--------|--------------|
-| 0.0.1  | Jan 20 2025  |
-| 0.0.2  | Jan 21 2025  |
+|---------|--------------|
+| 0.0.1   | Jan 20 2025  |
+| 0.0.2   | Jan 21 2025  |
+| 0.0.3   | Jan 22 2025  |
 
 
 ## Changelog
-### 0.0.1
-- Initial setup and MVP functionality
-- Includes module unit-socializer-junit-mockito
+
+### 0.0.3
+- Bugfix MockConfigReader: default config is now loaded
+- Remove default configs as they are not useful at the moment
 
 ### 0.0.2
 - Include default config in jar
+
+### 0.0.1
+- Initial setup and MVP functionality
+- Includes module unit-socializer-junit-mockito
 
 ## Problems / Feature Requests
 If you encounter an issue of if you're missing an (important) feature,
