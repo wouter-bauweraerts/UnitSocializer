@@ -2,6 +2,7 @@ package io.github.wouterbauweraerts.unitsocializer.core.helpers.classpath;
 
 import static org.junit.platform.commons.util.ReflectionUtils.isAbstract;
 
+import java.io.File;
 import java.util.List;
 
 import org.burningwave.core.assembler.ComponentSupplier;
@@ -25,7 +26,11 @@ public class ClasspathScanner {
         if (!isAbstract(abstractType)) {
             throw SociableTestException.notAbstract(abstractType.getSimpleName());
         }
-        return doFind(abstractType);
+        // TODO doFind should be more granular
+        //    first look in current package
+        //    then work your way up --> while nothing found
+        //    finally scan entire classpath
+        return doFind(abstractType, abstractType.getPackageName());
     }
 
     /**
@@ -37,16 +42,37 @@ public class ClasspathScanner {
      * @return a list of concrete classes implementing the abstract type
      * @throws SociableTestException if an error occurs during the search
      */
-    private <T> List<Class<?>> doFind(Class<T> abstractType) {
+    private <T> List<Class<?>> doFind(Class<T> abstractType, String packageName) {
         ComponentSupplier componentSupplier = ComponentSupplier.getInstance();
         ClassHunter classHunter = componentSupplier.getClassHunter();
 
-        try(ClassCriteria cc = ClassCriteria.create().allThoseThatMatch(abstractType::isAssignableFrom)) {
-            return classHunter.findBy(SearchConfig.byCriteria(cc)).getClasses()
+        try(
+                ClassCriteria cc = ClassCriteria.create()
+                        .packageName(pn -> pn.startsWith(packageName))
+                        .and()
+                        .allThoseThatMatch(abstractType::isAssignableFrom)
+        ) {
+            List<Class<?>> results = classHunter.findBy(SearchConfig.forPaths(convertPackageToPath(packageName)).byCriteria(cc)).getClasses()
                     .stream()
                     .toList();
+
+            if (results.isEmpty() || packageName.isEmpty()) {
+                return results;
+            } else  {
+                return doFind(abstractType, getParentPackage(packageName));
+            }
         } catch (Exception e) {
             throw new SociableTestException("Something went wrong while resolving type of " + abstractType, e);
         }
+    }
+
+    private static String getParentPackage(String packageName) {
+        return packageName.lastIndexOf('.') == -1
+                ? ""
+                : packageName.substring(0, packageName.lastIndexOf('.'));
+    }
+
+    private String convertPackageToPath(String packageName) {
+        return packageName.replace('.', File.pathSeparatorChar);
     }
 }
