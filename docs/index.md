@@ -105,9 +105,13 @@ Not all module is suitable for direct use, but they are reused within other modu
 | 0.0.1   | Jan 20 2025  |
 | 0.0.2   | Jan 21 2025  |
 | 0.0.3   | Jan 22 2025  |
+| 0.0.4   | Jan 27 2025  |
 
 
 ## Changelog
+
+### 0.0.4
+- Rework classpath scanning
 
 ### 0.0.3
 - Bugfix MockConfigReader: default config is now loaded
