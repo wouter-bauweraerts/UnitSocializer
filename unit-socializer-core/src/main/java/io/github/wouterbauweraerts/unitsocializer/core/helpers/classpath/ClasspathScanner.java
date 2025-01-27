@@ -26,10 +26,6 @@ public class ClasspathScanner {
         if (!isAbstract(abstractType)) {
             throw SociableTestException.notAbstract(abstractType.getSimpleName());
         }
-        // TODO doFind should be more granular
-        //    first look in current package
-        //    then work your way up --> while nothing found
-        //    finally scan entire classpath
         return doFind(abstractType, abstractType.getPackageName());
     }
 
