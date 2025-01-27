@@ -10,6 +10,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import io.github.wouterbauweraerts.unitsocializer.core.AnotherDummyInterfaceImpl;
+import io.github.wouterbauweraerts.unitsocializer.core.dummies.AnotherDummyAbstractClass;
+import io.github.wouterbauweraerts.unitsocializer.core.dummies.AnotherDummyInterface;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.DummyAbstractClass;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.DummyAbstractClassImpl;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.DummyAbstractClassMultipleImplementations;
@@ -19,6 +22,7 @@ import io.github.wouterbauweraerts.unitsocializer.core.dummies.DummyInterfaceImp
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.DummyInterfaceMultipleImplementations;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.DummyInterfaceNoImplementations;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.SimpleDummy;
+import io.github.wouterbauweraerts.unitsocializer.core.dummies.impl.AnotherDummyAbstractClassImpl;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 
 class TypeResolverTest {
@@ -79,7 +83,9 @@ class TypeResolverTest {
     static Stream<Arguments> singleImplementationSource() {
         return Stream.of(
                 Arguments.of(DummyAbstractClass.class, DummyAbstractClassImpl.class),
-                Arguments.of(DummyInterface.class, DummyInterfaceImpl.class)
+                Arguments.of(AnotherDummyAbstractClass.class, AnotherDummyAbstractClassImpl.class),
+                Arguments.of(DummyInterface.class, DummyInterfaceImpl.class),
+                Arguments.of(AnotherDummyInterface.class, AnotherDummyInterfaceImpl.class)
         );
     }
 }
