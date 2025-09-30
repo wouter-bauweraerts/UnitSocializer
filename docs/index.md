@@ -101,14 +101,18 @@ Not all module is suitable for direct use, but they are reused within other modu
 ## Releases
 
 | Version | Release Date |
-|---------|--------------|
-| 0.0.1   | Jan 20 2025  |
-| 0.0.2   | Jan 21 2025  |
-| 0.0.3   | Jan 22 2025  |
-| 0.0.4   | Jan 27 2025  |
+|--------|--------------|
+| 1.0.0  | Sep 30 2025  |
+| 0.0.4  | Jan 27 2025  |
+| 0.0.3  | Jan 22 2025  |
+| 0.0.2  | Jan 21 2025  |
+| 0.0.1  | Jan 20 2025  |
 
 
 ## Changelog
+
+### 1.0.0
+- Initial release
 
 ### 0.0.4
 - Rework classpath scanning
