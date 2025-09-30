@@ -5,7 +5,7 @@
 
     <groupId>io.github.wouter-bauweraerts</groupId>
     <artifactId>unit-socializer</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>UnitSocializer</name>
@@ -194,6 +194,9 @@
                     <inherited>false</inherited>
                     <configuration>
                         <jreleaser>
+                            <project>
+                                <copyright>MIT Wouter Bauweraerts</copyright>
+                            </project>
                             <signing>
                                 <active>ALWAYS</active>
                                 <armored>true</armored>
