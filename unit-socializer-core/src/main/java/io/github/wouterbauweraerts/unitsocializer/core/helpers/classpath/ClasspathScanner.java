@@ -9,10 +9,13 @@ import org.burningwave.core.assembler.ComponentSupplier;
 import org.burningwave.core.classes.ClassCriteria;
 import org.burningwave.core.classes.ClassHunter;
 import org.burningwave.core.classes.SearchConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 
 public class ClasspathScanner {
+    private static final Logger LOG = LoggerFactory.getLogger(ClasspathScanner.class);
 
     /**
      * Searches for all concrete implementations of the given abstract type.
@@ -39,8 +42,11 @@ public class ClasspathScanner {
      * @throws SociableTestException if an error occurs during the search
      */
     private <T> List<Class<?>> doFind(Class<T> abstractType, String packageName) {
+        LOG.warn("Searching classpath for concrete implementations of '{}'.", abstractType.getSimpleName());
+
         ComponentSupplier componentSupplier = ComponentSupplier.getInstance();
         ClassHunter classHunter = componentSupplier.getClassHunter();
+
 
         try(
                 ClassCriteria cc = ClassCriteria.create()
