@@ -58,9 +58,28 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
     public void beforeEach(ExtensionContext context) {
         Class<?> testClass = context.getTestClass()
                 .orElseThrow(() -> new SociableTestException("TestClass not found!"));
+
         Object testInstance = context.getTestInstance()
                 .orElseThrow(() -> new SociableTestException("TestInstance not found!"));
-    
+
+        // If we are in a @Nested test class, use the enclosing (outer) instance for field processing
+        Class<?> declaringClass = testClass.getDeclaringClass();
+        if (declaringClass != null) {
+            Object outerInstance = context.getTestInstances()
+                    .orElseThrow(() -> new SociableTestException("TestInstances not found!"))
+                    .getEnclosingInstances().stream()
+                    .filter(declaringClass::isInstance)
+                    .findFirst()
+                    .orElseThrow(() -> new SociableTestException(
+                            "Enclosing test instance for class %s not found!".formatted(declaringClass.getName())));
+
+            // Keep passing the nested test class; the handler will switch to its declaring class
+            // and operate on the provided outer instance
+            beforeEachCallbackHandler.beforeEach(declaringClass, outerInstance);
+            return;
+        }
+
+        // Regular (non-nested) test case
         beforeEachCallbackHandler.beforeEach(testClass, testInstance);
     }
 
