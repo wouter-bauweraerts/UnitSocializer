@@ -28,7 +28,7 @@ public abstract class MockFactory {
      * 
      * @param config the {@link MockingConfig} containing the mock-related configuration data
      */
-    public MockFactory(MockingConfig config) {
+    protected MockFactory(MockingConfig config) {
         this.config = config;
     }
 
