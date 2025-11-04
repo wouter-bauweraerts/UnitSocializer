@@ -1,11 +1,5 @@
 package io.github.wouterbauweraerts.unitsocializer.core.extension;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Logger;
-
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.InjectTestInstance;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.Predefined;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
@@ -14,6 +8,12 @@ import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestExc
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.unitsocializer.core.helpers.InstanceHelper;
 import io.github.wouterbauweraerts.unitsocializer.core.util.ReflectionUtil;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Handles operations to be executed before each test method in a sociable test class.
@@ -62,9 +62,10 @@ public class BeforeEachCallbackHandler {
      * @throws SociableTestException if no @TestSubject fields are found or other validation issues occur
      */
     public void beforeEach(Class<?> testClass, Object testInstance) {
-        List<Field> predefinedFields = filterFields(testClass.getDeclaredFields(), Predefined.class);
-        List<Field> testSubjects = filterFields(testClass.getDeclaredFields(), TestSubject.class);
-        List<Field> fieldsToInject = filterFields(testClass.getDeclaredFields(), InjectTestInstance.class);
+        Field[] classFields = testClass.getDeclaredFields();
+        List<Field> predefinedFields = filterFields(classFields, Predefined.class);
+        List<Field> testSubjects = filterFields(classFields, TestSubject.class);
+        List<Field> fieldsToInject = filterFields(classFields, InjectTestInstance.class);
 
         if (testSubjects.isEmpty()) {
             throw new SociableTestException("No fields annotated with @TestSubject found!");
