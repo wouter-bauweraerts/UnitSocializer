@@ -1,9 +1,8 @@
-package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks;
+package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline;
 
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.InjectTestInstance;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
-import io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.DummyAnnotation;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
 import org.junit.jupiter.api.Test;
 
