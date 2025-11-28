@@ -68,13 +68,17 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
         ConfigureMocking mockConfigurationAnnotation = testClass.getAnnotation(ConfigureMocking.class);
         if (mockConfigurationAnnotation != null) {
-            beforeEachCallbackHandler.updateMockConfig(
-                    new MockingConfig(
-                            Arrays.asList(mockConfigurationAnnotation.annotations()),
-                            Arrays.asList(mockConfigurationAnnotation.classes()),
-                            Arrays.asList(mockConfigurationAnnotation.packages())
-                    )
+            MockingConfig annotationConfig = new MockingConfig(
+                    Arrays.asList(mockConfigurationAnnotation.annotations()),
+                    Arrays.asList(mockConfigurationAnnotation.classes()),
+                    Arrays.asList(mockConfigurationAnnotation.packages())
             );
+
+            switch (mockConfigurationAnnotation.strategy()) {
+                case MERGE -> beforeEachCallbackHandler.updateMockConfig(MockingConfig.merge(defaultMockingConfig, annotationConfig));
+                case OVERWRITE -> beforeEachCallbackHandler.updateMockConfig(annotationConfig);
+            }
+
         } else {
             beforeEachCallbackHandler.updateMockConfig(defaultMockingConfig);
         }
