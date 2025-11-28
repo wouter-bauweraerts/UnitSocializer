@@ -61,7 +61,7 @@ With the configuration for **annotations** you can define the annotations that w
 If a class is annotated with one of the annotations listed here, a mock will be provided instead of a real instance.
 
 The last parameter is the strategy to be used for this specific test.
-Currently we support two strategies: `REPLACE` and `MERGE`.
+Currently, we support two strategies: `REPLACE` and `MERGE`.
 `REPLACE` will replace the default configuration with the one defined in the annotation.
 `MERGE` will merge the default configuration with the one defined in the annotation.
 This means that the default configuration will be used for classes that are not mocked in the annotation.`.
