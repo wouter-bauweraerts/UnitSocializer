@@ -1,5 +1,6 @@
 package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension;
 
+import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -10,6 +11,8 @@ import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestConte
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.unitsocializer.core.extension.BeforeEachCallbackHandler;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.JunitMockitoSociableTestInitializer;
+
+import java.util.Arrays;
 
 /**
  * JUnit extension that integrates Mockito-based sociable testing functionality.
@@ -61,6 +64,17 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
         Object testInstance = context.getTestInstance()
                 .orElseThrow(() -> new SociableTestException("TestInstance not found!"));
+
+        ConfigureMocking mockConfigurationAnnotation = testClass.getAnnotation(ConfigureMocking.class);
+        if (mockConfigurationAnnotation != null) {
+            beforeEachCallbackHandler.updateMockConfig(
+                    new MockingConfig(
+                            Arrays.asList(mockConfigurationAnnotation.annotations()),
+                            Arrays.asList(mockConfigurationAnnotation.classes()),
+                            Arrays.asList(mockConfigurationAnnotation.packages())
+                    )
+            );
+        }
 
         // If we are in a @Nested test class, use the enclosing (outer) instance for field processing
         Class<?> declaringClass = testClass.getDeclaringClass();
