@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mockingDetails;
 
 @SociableTest
 @ConfigureMocking(
-        packages = "io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline"
+        packages = "io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline.dummy"
 )
 public class CanInstantiateDummyClassWithInlinedMockConfigurationOnPackageTest {
     @TestSubject

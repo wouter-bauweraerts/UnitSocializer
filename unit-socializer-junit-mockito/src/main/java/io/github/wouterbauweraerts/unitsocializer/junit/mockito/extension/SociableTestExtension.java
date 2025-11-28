@@ -27,6 +27,7 @@ import java.util.Arrays;
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
     private final SociableTestContext sociableTestContext;
     private final BeforeEachCallbackHandler beforeEachCallbackHandler;
+    private final MockingConfig defaultMockingConfig;
 
     /**
      * Constructs a new instance of the {@code SociableTestExtension}.
@@ -37,8 +38,8 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
      */
     public SociableTestExtension() {
         sociableTestContext = SociableTestContext.getInstance();
-        MockingConfig mockingConfig = JunitMockitoSociableTestInitializer.configReader().loadConfig();
-        beforeEachCallbackHandler = JunitMockitoSociableTestInitializer.beforeEachCallbackHandler(sociableTestContext, mockingConfig);
+        defaultMockingConfig = JunitMockitoSociableTestInitializer.configReader().loadConfig();
+        beforeEachCallbackHandler = JunitMockitoSociableTestInitializer.beforeEachCallbackHandler(sociableTestContext, defaultMockingConfig);
     }
 
     /**
@@ -74,6 +75,8 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
                             Arrays.asList(mockConfigurationAnnotation.packages())
                     )
             );
+        } else {
+            beforeEachCallbackHandler.updateMockConfig(defaultMockingConfig);
         }
 
         // If we are in a @Nested test class, use the enclosing (outer) instance for field processing
