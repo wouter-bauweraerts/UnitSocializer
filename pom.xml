@@ -64,14 +64,14 @@
         <maven.compiler.target>21</maven.compiler.target>
         <maven.compiler.release>21</maven.compiler.release>
 
-        <junit.version>5.11.4</junit.version>
+        <junit.version>6.0.1</junit.version>
         <mockito.version>5.20.0</mockito.version>
-        <jackson.version>2.17.2</jackson.version>
+        <jackson.version>2.20.1</jackson.version>
         <burningwave.version>12.66.2</burningwave.version>
-        <junit-platform-launcher.version>1.11.3</junit-platform-launcher.version>
-        <instancio.version>5.3.0</instancio.version>
-        <commons-lang3.version>3.17.0</commons-lang3.version>
-        <byte-buddy.version>1.18.0</byte-buddy.version>
+        <junit-platform-launcher.version>6.0.1</junit-platform-launcher.version>
+        <instancio.version>5.5.1</instancio.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
+        <byte-buddy.version>1.18.2</byte-buddy.version>
     </properties>
 
     <dependencyManagement>
