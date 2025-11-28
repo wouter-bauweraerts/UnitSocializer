@@ -18,9 +18,10 @@ Please check [Maven Central Repository](https://central.sonatype.com/artifact/io
 The unit-socializer-junit-mockito module requires dependencies on jUnit and Mockito.
 I guarantee that it works with this version, using other versions may or may not cause problems.
 
-| UnitSocializer | junit-jupiter | mockito |
-|----------------|---------------|---------|
-| 0.0.2          | 5.11.4        | 5.15.2  |
+| UnitSocializer | junit-jupiter | mockito | JDK                         |
+|----------------|---------------|---------|-----------------------------|
+| 1.0.0          | 5.11.4        | 5.15.2  | 17 - 21 (tested on Temurin) |
+| 1.1.0          | 5.11.4        | 5.20.0  | 17 - 25 (tested on Temurin) |
 
 ### Usage
 The UnitSocializer jUnit-Mockito module provides a Sociable Test extension built upon jUnit 5.
