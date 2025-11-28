@@ -76,7 +76,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
             switch (mockConfigurationAnnotation.strategy()) {
                 case MERGE -> beforeEachCallbackHandler.updateMockConfig(MockingConfig.merge(defaultMockingConfig, annotationConfig));
-                case OVERWRITE -> beforeEachCallbackHandler.updateMockConfig(annotationConfig);
+                case REPLACE -> beforeEachCallbackHandler.updateMockConfig(annotationConfig);
             }
 
         } else {

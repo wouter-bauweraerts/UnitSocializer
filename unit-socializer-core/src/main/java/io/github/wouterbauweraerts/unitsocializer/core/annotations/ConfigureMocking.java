@@ -44,5 +44,5 @@ public @interface ConfigureMocking {
      *
      * @return the {@link MockConfigStrategy} to use, defaults to OVERWRITE
      */
-    MockConfigStrategy strategy() default MockConfigStrategy.OVERWRITE;
+    MockConfigStrategy strategy() default MockConfigStrategy.REPLACE;
 }

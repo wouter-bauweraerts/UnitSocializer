@@ -16,5 +16,5 @@ public enum MockConfigStrategy {
     /**
      * Overwrites any existing mock configuration with the new configuration, discarding the old one.
      */
-    OVERWRITE
+    REPLACE
 }
