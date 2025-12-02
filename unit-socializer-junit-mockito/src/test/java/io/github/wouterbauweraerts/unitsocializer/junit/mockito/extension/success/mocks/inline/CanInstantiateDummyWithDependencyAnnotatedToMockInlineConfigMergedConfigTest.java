@@ -3,7 +3,9 @@ package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.succe
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.InjectTestInstance;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
+import io.github.wouterbauweraerts.unitsocializer.core.config.MockConfigStrategy;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.DummyAnnotation;
+import io.github.wouterbauweraerts.unitsocializer.core.util.MockUtil;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +13,12 @@ import java.lang.annotation.Retention;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockingDetails;
 
 @SociableTest
-@ConfigureMocking(annotations = CanInstantiateDummyWithDependencyAnnotatedToMockInlineConfigMergedConfigTest.InlineDummyAnnotation.class)
+@ConfigureMocking(
+        annotations = CanInstantiateDummyWithDependencyAnnotatedToMockInlineConfigMergedConfigTest.InlineDummyAnnotation.class,
+        strategy = MockConfigStrategy.MERGE
+)
 class CanInstantiateDummyWithDependencyAnnotatedToMockInlineConfigMergedConfigTest {
     @TestSubject
     DummyWithAnnotatedClassToMock subject;
@@ -27,10 +31,10 @@ class CanInstantiateDummyWithDependencyAnnotatedToMockInlineConfigMergedConfigTe
         assertThat(subject).isNotNull();
 
         assertThat(subject.dummy()).isNotNull();
-        assertThat(mockingDetails(subject.dummy()).isMock()).isTrue();
+        assertThat(MockUtil.isMock(subject.dummy())).isTrue();
 
         assertThat(subject.dummyFromFile()).isNotNull();
-        assertThat(mockingDetails(subject.dummyFromFile()).isMock()).isTrue();
+        assertThat(MockUtil.isMock(subject.dummyFromFile())).isTrue();
 
         assertThat(mockedDummy).isNotNull();
         assertThat(subject.dummy()).isSameAs(mockedDummy);

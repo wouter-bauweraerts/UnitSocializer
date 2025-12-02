@@ -4,6 +4,7 @@ import io.github.wouterbauweraerts.unitsocializer.core.config.MockConfigStrategy
 
 import java.lang.annotation.*;
 
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 
 /**
@@ -16,7 +17,7 @@ import static java.lang.annotation.ElementType.TYPE;
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(TYPE)
+@Target({TYPE, METHOD})
 public @interface ConfigureMocking {
     /**
      * Specifies packages whose classes should be mocked.

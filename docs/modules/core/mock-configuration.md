@@ -51,7 +51,8 @@ unit-socializer:
 ```
 
 ### Configuration using `@ConfigureMocking` annotation
-Just annotate the test class with `@ConfigureMocking` to configure what needs to be mocked.
+Just annotate the test class and/or individual test method with `@ConfigureMocking` to configure what needs to be mocked.
+If both test class and method are annotated, the method configuration will take precedence.
 This annotation takes 4 parameters:
 
 **Classes to mock** defines which classes should be mocked by default.

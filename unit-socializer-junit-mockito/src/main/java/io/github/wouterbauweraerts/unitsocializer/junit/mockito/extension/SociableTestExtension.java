@@ -66,7 +66,13 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
         Object testInstance = context.getTestInstance()
                 .orElseThrow(() -> new SociableTestException("TestInstance not found!"));
 
-        ConfigureMocking mockConfigurationAnnotation = testClass.getAnnotation(ConfigureMocking.class);
+        ConfigureMocking mockConfigurationAnnotation = context.getTestMethod().map(it -> it.getAnnotation(ConfigureMocking.class))
+                .orElse(null);
+
+        if (mockConfigurationAnnotation == null) {
+            mockConfigurationAnnotation = testClass.getAnnotation(ConfigureMocking.class);
+        }
+
         if (mockConfigurationAnnotation != null) {
             MockingConfig annotationConfig = new MockingConfig(
                     Arrays.asList(mockConfigurationAnnotation.annotations()),
@@ -75,7 +81,8 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
             );
 
             switch (mockConfigurationAnnotation.strategy()) {
-                case MERGE -> beforeEachCallbackHandler.updateMockConfig(MockingConfig.merge(defaultMockingConfig, annotationConfig));
+                case MERGE ->
+                        beforeEachCallbackHandler.updateMockConfig(MockingConfig.merge(defaultMockingConfig, annotationConfig));
                 case REPLACE -> beforeEachCallbackHandler.updateMockConfig(annotationConfig);
             }
 

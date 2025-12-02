@@ -4,12 +4,12 @@ import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMock
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockConfigStrategy;
 import io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.DummyAnnotation;
+import io.github.wouterbauweraerts.unitsocializer.core.util.MockUtil;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline.dummy.InlineConfigurationDummyClassToMock;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockingDetails;
 
 @SociableTest
 @ConfigureMocking(
@@ -25,8 +25,8 @@ public class CanInstantiateDummyClassWithInlinedMockConfigurationOnPackageMerged
         assertThat(subject).isNotNull();
         assertThat(subject.toMock()).isNotNull();
         assertThat(subject.toMockFromFile()).isNotNull();
-        assertThat(mockingDetails(subject.toMock()).isMock()).isTrue();
-        assertThat(mockingDetails(subject.toMockFromFile()).isMock()).isTrue();
+        assertThat(MockUtil.isMock(subject.toMock())).isTrue();
+        assertThat(MockUtil.isMock(subject.toMockFromFile())).isTrue();
     }
 
     public record DummyClassWithInlinedToMock(
