@@ -35,14 +35,14 @@ There is still some mocking or stubbing available, but only for controlling inte
 systems that are out of our control.
 
 ## Usage
-Please check the documentation site for a detailed usage description. (WIP: page does not exist yet)
+Please check the documentation site for a detailed usage description.
 To start using the project, please add the following to your pom.xml (Maven users)
 
 ```xml
 <dependency>
     <groupId>io.github.wouter-bauweraerts</groupId>
     <artifactId>sociable-testing-junit-mockito</artifactId>
-    <version>0.0.3</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
