@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         packages = "io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline.dummy",
         strategy = MockConfigStrategy.MERGE
 )
-public class CanInstantiateDummyClassWithInlinedMockConfigurationOnPackageMergedConfigTest {
+class CanInstantiateDummyClassWithInlinedMockConfigurationOnPackageMergedConfigTest {
     @TestSubject
     DummyClassWithInlinedToMock subject;
 

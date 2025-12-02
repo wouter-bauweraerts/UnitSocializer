@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ConfigureMocking(
         packages = "io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline.dummy"
 )
-public class CanInstantiateDummyClassWithInlinedMockConfigurationOnPackageTest {
+class CanInstantiateDummyClassWithInlinedMockConfigurationOnPackageTest {
     @TestSubject
     DummyClassWithInlinedToMock subject;
 

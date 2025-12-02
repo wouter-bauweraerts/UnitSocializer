@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ConfigureMocking(
         classes = InlineConfigurationDummyClassToMock.class
 )
-public class CanInstantiateDummyClassWithInlinedMockConfigurationOnClassTest {
+class CanInstantiateDummyClassWithInlinedMockConfigurationOnClassTest {
     @TestSubject
     DummyClassWithInlinedToMock subject;
 

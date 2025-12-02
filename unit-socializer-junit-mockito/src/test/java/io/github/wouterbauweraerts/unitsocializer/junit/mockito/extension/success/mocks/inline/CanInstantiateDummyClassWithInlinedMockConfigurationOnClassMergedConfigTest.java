@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         classes = InlineConfigurationDummyClassToMock.class,
         strategy = MockConfigStrategy.MERGE
 )
-public class CanInstantiateDummyClassWithInlinedMockConfigurationOnClassMergedConfigTest {
+class CanInstantiateDummyClassWithInlinedMockConfigurationOnClassMergedConfigTest {
     @TestSubject
     DummyClassWithInlinedToMock subject;
 
