@@ -3,9 +3,9 @@ package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.succe
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.Predefined;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
-import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.list.dummy.AbstractDummy;
-import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.list.dummy.AbstractDummyImplOne;
-import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.list.dummy.AbstractDummyImplTwo;
+import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.dummy.AbstractDummy;
+import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.dummy.AbstractDummyImplOne;
+import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.dummy.AbstractDummyImplTwo;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
