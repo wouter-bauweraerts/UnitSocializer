@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
+import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.unitsocializer.core.factory.MockFactory;
@@ -105,5 +106,9 @@ public class InstanceHelper {
         }
 
         return instance;
+    }
+
+    public void updateMockingConfig(MockingConfig config) {
+        this.mockFactory.updateMockingConfig(config);
     }
 }

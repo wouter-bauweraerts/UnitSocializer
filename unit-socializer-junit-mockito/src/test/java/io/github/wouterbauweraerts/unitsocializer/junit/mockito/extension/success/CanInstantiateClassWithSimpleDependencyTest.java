@@ -1,8 +1,8 @@
 package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockingDetails;
 
+import io.github.wouterbauweraerts.unitsocializer.core.util.MockUtil;
 import org.junit.jupiter.api.Test;
 
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
@@ -20,7 +20,7 @@ class CanInstantiateClassWithSimpleDependencyTest {
 
         SimpleDummy dependency = dummy.simpleDummy();
         assertThat(dependency).isNotNull();
-        assertThat(mockingDetails(dummy).isSpy()).isTrue();
+        assertThat(MockUtil.isSpy(dummy)).isTrue();
     }
 
     public record DummyWithSimpleDependency(SimpleDummy simpleDummy) {

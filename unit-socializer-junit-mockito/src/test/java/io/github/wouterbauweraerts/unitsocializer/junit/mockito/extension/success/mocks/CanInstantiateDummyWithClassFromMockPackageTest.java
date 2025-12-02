@@ -1,8 +1,8 @@
 package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockingDetails;
 
+import io.github.wouterbauweraerts.unitsocializer.core.util.MockUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class CanInstantiateDummyWithClassFromMockPackageTest {
     void createsExpected() {
         assertThat(subject).isNotNull();
         Assertions.assertThat(subject.toMock()).isNotNull();
-        assertThat(mockingDetails(subject.toMock()).isMock()).isTrue();
+        assertThat(MockUtil.isMock(subject.toMock())).isTrue();
     }
 
     public record DummyWithClassFromMockPackage(AmazingClass toMock) {

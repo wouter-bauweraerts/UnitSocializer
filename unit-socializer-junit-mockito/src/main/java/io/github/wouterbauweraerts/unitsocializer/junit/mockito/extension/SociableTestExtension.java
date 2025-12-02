@@ -1,5 +1,6 @@
 package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension;
 
+import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -10,6 +11,8 @@ import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestConte
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.unitsocializer.core.extension.BeforeEachCallbackHandler;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.JunitMockitoSociableTestInitializer;
+
+import java.util.Arrays;
 
 /**
  * JUnit extension that integrates Mockito-based sociable testing functionality.
@@ -24,6 +27,7 @@ import io.github.wouterbauweraerts.unitsocializer.junit.mockito.JunitMockitoSoci
 public class SociableTestExtension implements BeforeEachCallback, AfterEachCallback {
     private final SociableTestContext sociableTestContext;
     private final BeforeEachCallbackHandler beforeEachCallbackHandler;
+    private final MockingConfig defaultMockingConfig;
 
     /**
      * Constructs a new instance of the {@code SociableTestExtension}.
@@ -34,8 +38,8 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
      */
     public SociableTestExtension() {
         sociableTestContext = SociableTestContext.getInstance();
-        MockingConfig mockingConfig = JunitMockitoSociableTestInitializer.configReader().loadConfig();
-        beforeEachCallbackHandler = JunitMockitoSociableTestInitializer.beforeEachCallbackHandler(sociableTestContext, mockingConfig);
+        defaultMockingConfig = JunitMockitoSociableTestInitializer.configReader().loadConfig();
+        beforeEachCallbackHandler = JunitMockitoSociableTestInitializer.beforeEachCallbackHandler(sociableTestContext, defaultMockingConfig);
     }
 
     /**
@@ -61,6 +65,30 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
         Object testInstance = context.getTestInstance()
                 .orElseThrow(() -> new SociableTestException("TestInstance not found!"));
+
+        ConfigureMocking mockConfigurationAnnotation = context.getTestMethod().map(it -> it.getAnnotation(ConfigureMocking.class))
+                .orElse(null);
+
+        if (mockConfigurationAnnotation == null) {
+            mockConfigurationAnnotation = testClass.getAnnotation(ConfigureMocking.class);
+        }
+
+        if (mockConfigurationAnnotation != null) {
+            MockingConfig annotationConfig = new MockingConfig(
+                    Arrays.asList(mockConfigurationAnnotation.annotations()),
+                    Arrays.asList(mockConfigurationAnnotation.classes()),
+                    Arrays.asList(mockConfigurationAnnotation.packages())
+            );
+
+            switch (mockConfigurationAnnotation.strategy()) {
+                case MERGE ->
+                        beforeEachCallbackHandler.updateMockConfig(MockingConfig.merge(defaultMockingConfig, annotationConfig));
+                case REPLACE -> beforeEachCallbackHandler.updateMockConfig(annotationConfig);
+            }
+
+        } else {
+            beforeEachCallbackHandler.updateMockConfig(defaultMockingConfig);
+        }
 
         // If we are in a @Nested test class, use the enclosing (outer) instance for field processing
         Class<?> declaringClass = testClass.getDeclaringClass();

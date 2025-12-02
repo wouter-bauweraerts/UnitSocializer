@@ -1,16 +1,20 @@
-package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks;
+package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline;
 
+import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.InjectTestInstance;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
-import io.github.wouterbauweraerts.unitsocializer.core.dummies.mocking.DummyAnnotation;
 import io.github.wouterbauweraerts.unitsocializer.core.util.MockUtil;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
 import org.junit.jupiter.api.Test;
 
+import java.lang.annotation.Retention;
+
+import static java.lang.annotation.RetentionPolicy.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SociableTest
-class CanInstantiateDummyWithDependencyAnnotatedToMockDependencyTest {
+@ConfigureMocking(annotations = CanInstantiateDummyWithDependencyAnnotatedToMockInlineConfigTest.InlineDummyAnnotation.class)
+class CanInstantiateDummyWithDependencyAnnotatedToMockInlineConfigTest {
     @TestSubject
     DummyWithAnnotatedClassToMock subject;
 
@@ -31,7 +35,10 @@ class CanInstantiateDummyWithDependencyAnnotatedToMockDependencyTest {
     public record DummyWithAnnotatedClassToMock(AnnotatedDummyToMock dummy) {
     }
 
-    @DummyAnnotation
+    @InlineDummyAnnotation
     public static class AnnotatedDummyToMock {
     }
+
+    @Retention(value = RUNTIME)
+    public @interface InlineDummyAnnotation {}
 }

@@ -21,7 +21,7 @@ public abstract class MockFactory {
     /**
      * Configuration settings for mocking behavior used by the factory.
      */
-    private final MockingConfig config;
+    private MockingConfig config;
 
     /**
      * Constructs a MockFactory with the provided mocking configuration.
@@ -76,4 +76,8 @@ public abstract class MockFactory {
      * @return a spy instance based on the provided object
      */
     public abstract <T> T spy(T instance);
+
+    public void updateMockingConfig(MockingConfig config) {
+        this.config = config;
+    }
 }

@@ -3,6 +3,7 @@ package io.github.wouterbauweraerts.unitsocializer.core.extension;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.InjectTestInstance;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.Predefined;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
+import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestInstantiationException;
@@ -156,5 +157,9 @@ public class BeforeEachCallbackHandler {
                 throw new SociableTestException("Unable to inject test instance %s".formatted(field.getType().getName()), e);
             }
         });
+    }
+
+    public void updateMockConfig(MockingConfig config) {
+        this.instanceHelper.updateMockingConfig(config);
     }
 }

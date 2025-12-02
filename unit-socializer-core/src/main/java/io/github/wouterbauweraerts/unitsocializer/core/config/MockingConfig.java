@@ -2,6 +2,7 @@ package io.github.wouterbauweraerts.unitsocializer.core.config;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 /**
@@ -21,4 +22,17 @@ public record MockingConfig(
         List<Class<?>> classes,
         List<String> packages
 ) {
+    public static MockingConfig merge(MockingConfig first, MockingConfig second) {
+        return new MockingConfig(
+                mergeUnique(first.annotations, second.annotations),
+                mergeUnique(first.classes, second.classes),
+                mergeUnique(first.packages, second.packages)
+        );
+    }
+
+    private static <T> List<T> mergeUnique(List<T> first, List<T> second) {
+        return Stream.concat(first.stream(), second.stream())
+                .distinct()
+                .toList();
+    }
 }
