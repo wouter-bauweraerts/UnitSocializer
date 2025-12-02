@@ -17,10 +17,7 @@ public class CanInstantiateDummyCLassWithPerTestMockConfigurationTest {
     DummyTestSubject subject;
 
     @Test
-    @ConfigureMocking(
-            annotations = DummyAnnotation.class,
-            strategy = MockConfigStrategy.REPLACE
-    )
+    @ConfigureMocking(annotations = DummyAnnotation.class)
     void testMockConfigurationAnnotationLevel() {
         assertThat(subject).isNotNull();
         assertThat(subject.inline).isNotNull();
@@ -32,11 +29,20 @@ public class CanInstantiateDummyCLassWithPerTestMockConfigurationTest {
     }
 
     @Test
-    @ConfigureMocking(
-            classes = InlineConfigurationDummyClassToMock.class,
-            strategy = MockConfigStrategy.REPLACE
-    )
+    @ConfigureMocking(classes = InlineConfigurationDummyClassToMock.class)
     void testMockConfigurationClassLevel() {
+        assertThat(subject).isNotNull();
+        assertThat(subject.inline).isNotNull();
+        assertThat(subject.annotated).isNotNull();
+        assertThat(MockUtil.isMock(subject.inline))
+                .withFailMessage("Expected subject.inline to be a mock").isTrue();
+        assertThat(MockUtil.isSpy(subject.annotated))
+                .withFailMessage("Expected subject.annotated not to be a mock").isTrue();
+    }
+
+    @Test
+    @ConfigureMocking(packages = "io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline.dummy")
+    void testMockConfigurationPackageLevel() {
         assertThat(subject).isNotNull();
         assertThat(subject.inline).isNotNull();
         assertThat(subject.annotated).isNotNull();
@@ -49,16 +55,16 @@ public class CanInstantiateDummyCLassWithPerTestMockConfigurationTest {
     @Test
     @ConfigureMocking(
             packages = "io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.mocks.inline.dummy",
-            strategy = MockConfigStrategy.REPLACE
+            annotations = DummyAnnotation.class
     )
-    void testMockConfigurationPackageLevel() {
+    void testMockConfigurationPackageLevelMultipleConfigLevels() {
         assertThat(subject).isNotNull();
         assertThat(subject.inline).isNotNull();
         assertThat(subject.annotated).isNotNull();
         assertThat(MockUtil.isMock(subject.inline))
                 .withFailMessage("Expected subject.inline to be a mock").isTrue();
-        assertThat(MockUtil.isSpy(subject.annotated))
-                .withFailMessage("Expected subject.annotated not to be a mock").isTrue();
+        assertThat(MockUtil.isMock(subject.annotated))
+                .withFailMessage("Expected subject.annotated to be a mock").isTrue();
     }
 
     @Test
