@@ -273,3 +273,12 @@ Small Device Styles
   h5 { font-size: 14px; }
   h6 { font-size: 12px; }
   code, pre { min-width: 240px; max-width: 320px; font-size: 11px; } }
+
+img.logo {
+  float: left;
+  position: relative;
+  max-width: 20vw;
+  margin-right: 2rem;
+  border: none;
+  box-shadow: none;
+}
