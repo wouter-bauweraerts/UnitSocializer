@@ -1,6 +1,7 @@
 package io.github.wouterbauweraerts.unitsocializer.core.factory;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Supplier;
@@ -119,6 +120,10 @@ public class TypeHelper {
     public Class<?> getTypeClass(Type type) {
         if (type instanceof Class<?> c) {
             return c;
+        }
+
+        if (type instanceof ParameterizedType pt) {
+            return getTypeClass(pt.getRawType());
         }
 
         throw new SociableTestException("Unsupported type: %s".formatted(type.getTypeName()));
