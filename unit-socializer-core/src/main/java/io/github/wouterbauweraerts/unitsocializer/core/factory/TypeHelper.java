@@ -1,6 +1,7 @@
 package io.github.wouterbauweraerts.unitsocializer.core.factory;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -68,6 +69,19 @@ public class TypeHelper {
     }
 
     /**
+     * Checks if the given {@code Type} is a primitive type or belongs to the Java standard library.
+     *
+     * @param type the type to check
+     * @return {@code true} if the class is a Java type, {@code false} otherwise
+     */
+    public boolean isJavaType(Type type) {
+        if (type instanceof Class<?> c) {
+            return c.isPrimitive() || c.getPackage().getName().startsWith("java.");
+        }
+        return false;
+    }
+
+    /**
      * Creates an instance of the specified Java type using Instancio.
      *
      * @param javaType the Java type to create
@@ -100,5 +114,13 @@ public class TypeHelper {
         } else {
             throw new SociableTestException("Unsupported list implementation: %s".formatted(listClass.getCanonicalName()));
         }
+    }
+
+    public Class<?> getTypeClass(Type type) {
+        if (type instanceof Class<?> c) {
+            return c;
+        }
+
+        throw new SociableTestException("Unsupported type: %s".formatted(type.getTypeName()));
     }
 }

@@ -6,7 +6,9 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
@@ -161,8 +163,17 @@ public class InstanceHelper {
 
             Class<?> implementation = typeHelper.getListImplementation(typeClass);
 
-            if (typeHelper.isJavaType(typeArgs[0].getClass())) {
+            if (typeHelper.isJavaType(typeArgs[0])) {
                 return Instancio.ofList(() -> typeArgs[0]).subtype(root(), implementation).create();
+            } else {
+                Class<?> clazz = typeHelper.getTypeClass(typeArgs[0]);
+                List<?> elements = typeResolver.resolveAll(clazz).stream()
+                        .map(this::instantiate)
+                        .toList();
+
+                List<Object> createdList = Instancio.ofList(() -> typeArgs[0]).size(0).create();
+                createdList.addAll(elements);
+                return createdList;
             }
         }
         return null;

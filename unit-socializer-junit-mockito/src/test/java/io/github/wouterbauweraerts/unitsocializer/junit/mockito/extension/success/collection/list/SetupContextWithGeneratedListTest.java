@@ -2,6 +2,8 @@ package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.succe
 
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
+import io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.success.collection.dummy.AbstractDummy;
+import org.assertj.core.api.BooleanAssert;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -49,5 +51,27 @@ public class SetupContextWithGeneratedListTest {
         }
     }
 
+    @Nested
+    public class ListOfCustomType {
+        @TestSubject
+        DummyWithListOfCustomType subject;
 
+        @Test
+        void canCreateInstanceWithListOfCustomTypeWithAllImplementations() {
+            assertThat(subject).isNotNull();
+            assertThat(subject.list).isNotNull()
+                    .isInstanceOf(ArrayList.class)
+                    .hasSize(2)
+                    .satisfies(lst -> {
+                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplOne)).isTrue();
+                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplTwo)).isTrue();
+                    });
+        }
+
+        public record DummyWithListOfCustomType(List<AbstractDummyForGenerateList> list) {}
+
+        public interface AbstractDummyForGenerateList {}
+        public record AbstractDummyImplOne() implements AbstractDummyForGenerateList {}
+        public record AbstractDummyImplTwo(int integerValue) implements AbstractDummyForGenerateList {}
+    }
 }
