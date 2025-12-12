@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Supplier;
 
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
@@ -11,6 +12,9 @@ import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestConte
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.unitsocializer.core.factory.MockFactory;
 import io.github.wouterbauweraerts.unitsocializer.core.factory.TypeHelper;
+import org.instancio.Instancio;
+import org.instancio.TypeToken;
+import org.instancio.TypeTokenSupplier;
 
 
 /**
@@ -126,6 +130,35 @@ public class InstanceHelper {
 
         if (instances.exists(typeClass)) {
             return instances.get(typeClass);
+        }
+
+        if (typeHelper.isJavaType(typeClass) && !typeHelper.isCollection(typeClass)) {
+            return typeHelper.createJavaType(Instancio.create(() -> pt));
+        }
+
+        if (mockFactory.shouldMock(typeClass)) {
+            return instances.putIfAbsent(
+                    pt.getRawType().getClass(),
+                    mockFactory.mock(typeClass)
+            );
+        }
+
+        if (typeHelper.isCollection(typeClass)) {
+            return instantiateCollection(typeClass, typeArgs);
+        }
+
+        return null;
+    }
+
+    private Collection<?> instantiateCollection(Class<?> typeClass, Type[] typeArgs) {
+        if (typeHelper.isList(typeClass)) {
+            if (typeArgs.length > 1) {
+                throw new SociableTestInstantiationException("Cannot instantiate a List with multiple generic types");
+            }
+
+            if (typeHelper.isJavaType(typeArgs[0].getClass())) {
+                return Instancio.ofList(() -> typeArgs[0]).create();
+            }
         }
         return null;
     }

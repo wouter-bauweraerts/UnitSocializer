@@ -2,7 +2,9 @@ package io.github.wouterbauweraerts.unitsocializer.core.factory;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Supplier;
 
 import org.instancio.Instancio;
@@ -81,5 +83,13 @@ public class TypeHelper {
             throw new SociableTestException("Cannot create Java type. %s is not a Java type!".formatted(javaType.getCanonicalName()));
         }
         return Instancio.create(javaType);
+    }
+
+    public boolean isCollection(Class<?> typeClass) {
+        return Collection.class.isAssignableFrom(typeClass);
+    }
+
+    public boolean isList(Class<?> typeClass) {
+        return List.class.isAssignableFrom(typeClass);
     }
 }
