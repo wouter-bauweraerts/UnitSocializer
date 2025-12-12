@@ -1,10 +1,7 @@
 package io.github.wouterbauweraerts.unitsocializer.core.factory;
 
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 
 import org.instancio.Instancio;
@@ -91,5 +88,17 @@ public class TypeHelper {
 
     public boolean isList(Class<?> typeClass) {
         return List.class.isAssignableFrom(typeClass);
+    }
+
+    public Class<?> getListImplementation(Class<?> listClass) {
+        if (listClass.equals(LinkedList.class)) {
+            return LinkedList.class;
+        } else if (listClass.equals(ArrayList.class) || listClass.equals(List.class)) {
+            return ArrayList.class;
+        } else if (listClass.equals(Vector.class)) {
+            return Vector.class;
+        } else {
+            throw new SociableTestException("Unsupported list implementation: %s".formatted(listClass.getCanonicalName()));
+        }
     }
 }

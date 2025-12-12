@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.function.Supplier;
 
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
@@ -15,6 +16,8 @@ import io.github.wouterbauweraerts.unitsocializer.core.factory.TypeHelper;
 import org.instancio.Instancio;
 import org.instancio.TypeToken;
 import org.instancio.TypeTokenSupplier;
+
+import static org.instancio.Select.root;
 
 
 /**
@@ -156,8 +159,10 @@ public class InstanceHelper {
                 throw new SociableTestInstantiationException("Cannot instantiate a List with multiple generic types");
             }
 
+            Class<?> implementation = typeHelper.getListImplementation(typeClass);
+
             if (typeHelper.isJavaType(typeArgs[0].getClass())) {
-                return Instancio.ofList(() -> typeArgs[0]).create();
+                return Instancio.ofList(() -> typeArgs[0]).subtype(root(), implementation).create();
             }
         }
         return null;

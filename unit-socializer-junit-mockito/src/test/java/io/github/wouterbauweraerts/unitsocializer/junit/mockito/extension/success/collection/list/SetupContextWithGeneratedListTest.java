@@ -5,6 +5,8 @@ import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.Soci
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,6 +22,7 @@ public class SetupContextWithGeneratedListTest {
         void canInstantiateDummyWithPredefinedListOfIntegers() {
             assertThat(subject).isNotNull();
             assertThat(subject.list).isNotNull()
+                    .isInstanceOf(ArrayList.class)
                     .isNotEmpty()
                     .allSatisfy(el -> assertThat(el).isInstanceOf(Integer.class));
         }
@@ -37,11 +40,12 @@ public class SetupContextWithGeneratedListTest {
         void canInstantiateDummyWithPredefinedListOfIntegers() {
             assertThat(subject).isNotNull();
             assertThat(subject.list).isNotNull()
+                    .isInstanceOf(LinkedList.class)
                     .isNotEmpty()
                     .allSatisfy(el -> assertThat(el).isInstanceOf(String.class));
         }
 
-        public record DummyWithJavaTypeList(List<String> list) {
+        public record DummyWithJavaTypeList(LinkedList<String> list) {
         }
     }
 
