@@ -1,6 +1,8 @@
 package io.github.wouterbauweraerts.unitsocializer.core.helpers;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
@@ -12,12 +14,12 @@ import io.github.wouterbauweraerts.unitsocializer.core.factory.TypeHelper;
 
 
 /**
- * Helper class responsible for managing the instantiation of objects, utilizing mocks, type resolution, 
+ * Helper class responsible for managing the instantiation of objects, utilizing mocks, type resolution,
  * and test context awareness during the creation of instances.
- * 
- * <p>It works closely with {@link MockFactory} and {@link TypeHelper} to manage object instantiation 
+ *
+ * <p>It works closely with {@link MockFactory} and {@link TypeHelper} to manage object instantiation
  * and enforce dependency resolution or mocking logic.</p>
- * 
+ *
  * @author Wouter Bauweraerts
  * @since 0.0.1
  */
@@ -30,9 +32,9 @@ public class InstanceHelper {
     /**
      * Constructs an {@code InstanceHelper}.
      *
-     * @param mockFactory   the factory used to create mock objects
-     * @param typeResolver  the resolver used to determine concrete types for abstract types
-     * @param typeHelper    the helper utility for resolving constructors and constructing instances
+     * @param mockFactory  the factory used to create mock objects
+     * @param typeResolver the resolver used to determine concrete types for abstract types
+     * @param typeHelper   the helper utility for resolving constructors and constructing instances
      */
     public InstanceHelper(MockFactory mockFactory, TypeResolver typeResolver, TypeHelper typeHelper) {
         this.mockFactory = mockFactory;
@@ -52,7 +54,7 @@ public class InstanceHelper {
     /**
      * Creates an instance of the specified type.
      *
-     * <p>If the type already exists in the {@link SociableTestContext}, the existing instance is returned. 
+     * <p>If the type already exists in the {@link SociableTestContext}, the existing instance is returned.
      * Otherwise, this method creates an appropriate instance using the following logic:</p>
      * <ul>
      *     <li>If the type is a Java type, a native Java representation is created.</li>
@@ -93,8 +95,16 @@ public class InstanceHelper {
 
         Constructor<? extends T> constructor = typeHelper.getConstructor(typeToCreate);
 
-        Supplier<Object[]> paramResolver = () -> Arrays.stream(constructor.getParameterTypes())
-                .map(this::instantiate)
+        Supplier<Object[]> paramResolver = () -> Arrays.stream(constructor.getGenericParameterTypes())
+                .map(t -> {
+                    if (t instanceof ParameterizedType pt) {
+                        return this.instantiateGeneric(pt);
+                    } else if (t instanceof Class<?> c) {
+                        return this.instantiate(c);
+                    } else {
+                        return null;
+                    }
+                })
                 .toArray();
 
         T instance = mockFactory.spy(typeHelper.createInstance(constructor, paramResolver));
@@ -106,6 +116,18 @@ public class InstanceHelper {
         }
 
         return instance;
+    }
+
+    private Object instantiateGeneric(ParameterizedType pt) {
+        SociableTestContext instances = SociableTestContext.getInstance();
+
+        Class<?> typeClass = (Class<?>) pt.getRawType();
+        Type[] typeArgs = pt.getActualTypeArguments();
+
+        if (instances.exists(typeClass)) {
+            return instances.get(typeClass);
+        }
+        return null;
     }
 
     public void updateMockingConfig(MockingConfig config) {
