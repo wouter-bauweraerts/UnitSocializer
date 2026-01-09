@@ -80,6 +80,10 @@ public class SetupContextWithGeneratedListTest {
 
         @Test
         void canCreateInstanceWithListOfCustomTypeWithAllImplementations() {
+            /*
+            TODO When running this test in IDE, the test is flaky. Try to find a solution for this.
+                 It runs just fine on the command line (no flakiness up till now)
+             */
             assertThat(subject).isNotNull();
             assertThat(subject.list).isNotNull()
                     .isInstanceOf(ArrayList.class)
@@ -91,6 +95,33 @@ public class SetupContextWithGeneratedListTest {
         }
 
         public record DummyWithListOfCustomGenericType(List<AbstractDummyGenericType<?>> list) {}
+
+        public interface AbstractDummyGenericType<T> {
+            T value();
+        }
+
+        public record AbstractDummyImplOne(String value) implements AbstractDummyGenericType<String> {}
+
+        public record AbstractDummyImplTwo(Integer value) implements AbstractDummyGenericType<Number> {}
+    }
+
+    @Nested
+    public class ListOfCustomGenericTypeFiltered {
+        @TestSubject
+        DummyWithListOfCustomGenericType subject;
+
+        @Test
+        void canCreateInstanceWithListOfCustomTypeWithAllImplementations() {
+            assertThat(subject).isNotNull();
+            assertThat(subject.list).isNotNull()
+                    .isInstanceOf(ArrayList.class)
+                    .hasSize(1)
+                    .satisfies(lst -> {
+                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplOne)).isTrue();
+                    });
+        }
+
+        public record DummyWithListOfCustomGenericType(List<AbstractDummyGenericType<String>> list) {}
 
         public interface AbstractDummyGenericType<T> {
             T value();

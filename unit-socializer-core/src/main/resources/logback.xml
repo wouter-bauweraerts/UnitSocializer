@@ -8,7 +8,10 @@
         </layout>
     </appender>
 
+    <logger name="org.burningwave.core.classes.ClassHunterImpl" level="OFF"/>
+
     <root level="info">
         <appender-ref ref="CONSOLE"/>
     </root>
+
 </configuration>

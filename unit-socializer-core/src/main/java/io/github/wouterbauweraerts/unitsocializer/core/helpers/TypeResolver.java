@@ -3,13 +3,14 @@ package io.github.wouterbauweraerts.unitsocializer.core.helpers;
 import static java.util.Objects.isNull;
 
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.WildcardType;
+import java.util.*;
 
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.unitsocializer.core.helpers.classpath.ClasspathScanner;
+import io.github.wouterbauweraerts.unitsocializer.core.util.Pair;
 
 
 /**
@@ -116,19 +117,43 @@ public class TypeResolver {
             resolved.add(resolve(clazz));
         }
 
-        List<Class<T>> implementations = new ClasspathScanner().findImplementations(clazz)
-                .stream()
-                .filter(c -> !this.isAbstract(c))
-                .filter(clazz::isAssignableFrom)
-                .map(c -> (Class<T>) c)
-                .toList();
+        if (this.isAbstract(clazz)) {
+            List<Class<T>> implementations = ClasspathScanner.INSTANCE.findImplementations(clazz)
+                    .stream()
+                    .filter(c -> !this.isAbstract(c))
+                    .filter(clazz::isAssignableFrom)
+                    .map(c -> (Class<T>) c)
+                    .toList();
+            resolved.addAll(implementations);
+        } else {
+            resolved.add(clazz);
+        }
 
-        resolved.addAll(implementations);
 
         if (resolved.isEmpty()) {
             throw SociableTestException.noImplementations(clazz.getSimpleName());
         }
 
         return resolved;
+    }
+
+    public Class<?> resolveParameterized(Type rawType, Type[] actualTypeArguments) {
+        Class<?> rawClass = (Class<?>) rawType;
+
+        return ClasspathScanner.INSTANCE.findImplementations(rawClass).stream()
+                .map(it -> Pair.of(it, it.getGenericInterfaces()))
+                .filter(it -> Arrays.stream(it.second()).allMatch(t -> t instanceof ParameterizedType))
+                .filter(args -> {
+                    if (Arrays.stream(actualTypeArguments).allMatch(arg -> arg instanceof WildcardType)) {
+                        return true;
+                    }
+                    return Arrays.stream(args.second())
+                            .filter(it -> it instanceof ParameterizedType)
+                            .map(it -> (ParameterizedType) it)
+                            .map(ParameterizedType::getActualTypeArguments)
+                            .anyMatch(it -> Arrays.stream(it).allMatch(ta -> Arrays.stream(actualTypeArguments).allMatch(actTa -> actTa.equals(ta))));
+                })
+                .map(Pair::first)
+                .findFirst().orElseThrow();
     }
 }

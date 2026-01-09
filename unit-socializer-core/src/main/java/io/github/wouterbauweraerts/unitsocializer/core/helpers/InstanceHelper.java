@@ -166,7 +166,10 @@ public class InstanceHelper {
             if (typeHelper.isJavaType(typeArgs[0])) {
                 return Instancio.ofList(() -> typeArgs[0]).subtype(root(), implementation).create();
             } else {
-                Class<?> clazz = typeHelper.getTypeClass(typeArgs[0]);
+                Class<?> clazz = typeArgs[0] instanceof ParameterizedType pt ?
+                        typeResolver.resolveParameterized(pt.getRawType(), pt.getActualTypeArguments())
+                        : typeHelper.getTypeClass(typeArgs[0]);
+
                 List<?> elements = typeResolver.resolveAll(clazz).stream()
                         .map(this::instantiate)
                         .toList();

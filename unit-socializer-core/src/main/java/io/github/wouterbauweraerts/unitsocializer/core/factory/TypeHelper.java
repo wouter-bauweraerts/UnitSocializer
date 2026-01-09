@@ -122,10 +122,6 @@ public class TypeHelper {
             return c;
         }
 
-        if (type instanceof ParameterizedType pt) {
-            return getTypeClass(pt.getRawType());
-        }
-
         throw new SociableTestException("Unsupported type: %s".formatted(type.getTypeName()));
     }
 }
