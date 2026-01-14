@@ -105,6 +105,10 @@ public class TypeHelper {
         return List.class.isAssignableFrom(typeClass);
     }
 
+    public boolean isSet(Class<?> typeClass) {
+        return Set.class.isAssignableFrom(typeClass);
+    }
+
     public Class<?> getListImplementation(Class<?> listClass) {
         if (listClass.equals(LinkedList.class)) {
             return LinkedList.class;
@@ -115,6 +119,15 @@ public class TypeHelper {
         } else {
             throw new SociableTestException("Unsupported list implementation: %s".formatted(listClass.getCanonicalName()));
         }
+    }
+
+    public Class<?> getSetImplementation(Class<?> setClass) {
+        if (setClass.equals(HashSet.class)  || setClass.equals(Set.class)) {
+            return HashSet.class;
+        } else if (setClass.equals(LinkedHashSet.class)) {
+            return LinkedHashSet.class;
+        }
+        throw new SociableTestException("Unsupported Set implementation: %s".formatted(setClass.getCanonicalName()));
     }
 
     public Class<?> getTypeClass(Type type) {

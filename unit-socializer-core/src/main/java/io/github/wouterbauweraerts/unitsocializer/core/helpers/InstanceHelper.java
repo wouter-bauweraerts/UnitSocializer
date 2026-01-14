@@ -3,10 +3,7 @@ package io.github.wouterbauweraerts.unitsocializer.core.helpers;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -170,6 +167,26 @@ public class InstanceHelper {
                 List<Object> createdList = Instancio.ofList(() -> typeArgs[0]).size(0).create();
                 createdList.addAll(elements);
                 return createdList;
+            }
+        }
+        else if (typeHelper.isSet(typeClass)) {
+            if (typeArgs.length > 1) {
+                throw new SociableTestInstantiationException("Cannot instantiate a Set with multiple generic types");
+            }
+
+            Class<?> implementation = typeHelper.getSetImplementation(typeClass);
+
+            if (typeHelper.isJavaType(typeArgs[0])) {
+                return Instancio.ofSet(() -> typeArgs[0]).subtype(root(), implementation).create();
+            } else {
+                Class<?> clazz = typeHelper.getTypeClass(typeArgs[0]);
+                Set<?> elements = typeResolver.resolveAll(clazz).stream()
+                        .map(this::instantiate)
+                        .collect(Collectors.toSet());
+
+                Set<Object> createdSet = Instancio.ofSet(() -> typeArgs[0]).size(0).create();
+                createdSet.addAll(elements);
+                return createdSet;
             }
         }
         throw new SociableTestInstantiationException("Cannot instantiate a Collection of type " + typeClass.getSimpleName());
