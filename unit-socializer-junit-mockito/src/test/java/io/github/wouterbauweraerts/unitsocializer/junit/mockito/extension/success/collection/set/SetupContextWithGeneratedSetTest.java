@@ -2,11 +2,12 @@ package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension.succe
 
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.annotations.SociableTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +19,7 @@ public class SetupContextWithGeneratedSetTest {
         DummyWithJavaTypeSet subject;
 
         @Test
-        void canInstantiateDummyWithPredefinedListOfIntegers() {
+        void canInstantiateDummyWithPredefinedSetOfIntegers() {
             assertThat(subject).isNotNull();
             assertThat(subject.set).isNotNull()
                     .isInstanceOf(HashSet.class)
@@ -36,7 +37,7 @@ public class SetupContextWithGeneratedSetTest {
         DummyWithJavaTypeSet subject;
 
         @Test
-        void canInstantiateDummyWithPredefinedListOfIntegers() {
+        void canInstantiateDummyWithPredefinedSetOfIntegers() {
             assertThat(subject).isNotNull();
             assertThat(subject.set).isNotNull()
                     .isInstanceOf(LinkedHashSet.class)
@@ -54,7 +55,7 @@ public class SetupContextWithGeneratedSetTest {
         DummyWithSetOfCustomType subject;
 
         @Test
-        void canCreateInstanceWithListOfCustomTypeWithAllImplementations() {
+        void canCreateInstanceWithSetOfCustomTypeWithAllImplementations() {
             assertThat(subject).isNotNull();
             assertThat(subject.set).isNotNull()
                     .isInstanceOf(HashSet.class)
@@ -73,16 +74,15 @@ public class SetupContextWithGeneratedSetTest {
     }
 
     @Nested
-    @Disabled
-    class ListOfCustomGenericType {
+    class SetOfCustomGenericType {
         @TestSubject
-        DummyWithListOfCustomGenericType subject;
+        DummyWithSetOfCustomGenericType subject;
 
         @Test
-        void canCreateInstanceWithListOfCustomTypeWithAllImplementations() {
+        void canCreateInstanceWithSetOfCustomTypeWithAllImplementations() {
             assertThat(subject).isNotNull();
-            assertThat(subject.list).isNotNull()
-                    .isInstanceOf(ArrayList.class)
+            assertThat(subject.set).isNotNull()
+                    .isInstanceOf(HashSet.class)
                     .hasSize(2)
                     .satisfies(lst -> {
                         assertThat(lst.stream().anyMatch(AbstractDummyImplOne.class::isInstance)).isTrue();
@@ -90,7 +90,7 @@ public class SetupContextWithGeneratedSetTest {
                     });
         }
 
-        public record DummyWithListOfCustomGenericType(List<AbstractDummyGenericType<?>> list) {}
+        public record DummyWithSetOfCustomGenericType(Set<AbstractDummyGenericType<?>> set) {}
 
         public interface AbstractDummyGenericType<T> {
             T value();
