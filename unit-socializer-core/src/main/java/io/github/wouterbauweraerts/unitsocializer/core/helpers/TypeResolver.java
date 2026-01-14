@@ -3,6 +3,7 @@ package io.github.wouterbauweraerts.unitsocializer.core.helpers;
 import static java.util.Objects.isNull;
 
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,5 +107,28 @@ public class TypeResolver {
         }
 
         return (Class<? extends T>) implementations.getFirst();
+    }
+
+    public <T> List<Class<?>> resolveAll(Class<T> clazz) {
+        List<Class<?>> resolved = new ArrayList<>();
+
+        if (hasResolvedType(clazz)) {
+            resolved.add(resolve(clazz));
+        }
+
+        List<Class<T>> implementations = new ClasspathScanner().findImplementations(clazz)
+                .stream()
+                .filter(c -> !this.isAbstract(c))
+                .filter(clazz::isAssignableFrom)
+                .map(c -> (Class<T>) c)
+                .toList();
+
+        resolved.addAll(implementations);
+
+        if (resolved.isEmpty()) {
+            throw SociableTestException.noImplementations(clazz.getSimpleName());
+        }
+
+        return resolved;
     }
 }

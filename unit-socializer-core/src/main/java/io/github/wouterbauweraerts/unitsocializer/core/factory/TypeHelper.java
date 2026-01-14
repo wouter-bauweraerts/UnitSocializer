@@ -1,8 +1,9 @@
 package io.github.wouterbauweraerts.unitsocializer.core.factory;
 
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.*;
 import java.util.function.Supplier;
 
 import org.instancio.Instancio;
@@ -69,6 +70,19 @@ public class TypeHelper {
     }
 
     /**
+     * Checks if the given {@code Type} is a primitive type or belongs to the Java standard library.
+     *
+     * @param type the type to check
+     * @return {@code true} if the class is a Java type, {@code false} otherwise
+     */
+    public boolean isJavaType(Type type) {
+        if (type instanceof Class<?> c) {
+            return c.isPrimitive() || c.getPackage().getName().startsWith("java.");
+        }
+        return false;
+    }
+
+    /**
      * Creates an instance of the specified Java type using Instancio.
      *
      * @param javaType the Java type to create
@@ -81,5 +95,37 @@ public class TypeHelper {
             throw new SociableTestException("Cannot create Java type. %s is not a Java type!".formatted(javaType.getCanonicalName()));
         }
         return Instancio.create(javaType);
+    }
+
+    public boolean isCollection(Class<?> typeClass) {
+        return Collection.class.isAssignableFrom(typeClass);
+    }
+
+    public boolean isList(Class<?> typeClass) {
+        return List.class.isAssignableFrom(typeClass);
+    }
+
+    public Class<?> getListImplementation(Class<?> listClass) {
+        if (listClass.equals(LinkedList.class)) {
+            return LinkedList.class;
+        } else if (listClass.equals(ArrayList.class) || listClass.equals(List.class)) {
+            return ArrayList.class;
+        } else if (listClass.equals(Vector.class)) {
+            return Vector.class;
+        } else {
+            throw new SociableTestException("Unsupported list implementation: %s".formatted(listClass.getCanonicalName()));
+        }
+    }
+
+    public Class<?> getTypeClass(Type type) {
+        if (type instanceof Class<?> c) {
+            return c;
+        }
+
+        if (type instanceof ParameterizedType pt) {
+            return getTypeClass(pt.getRawType());
+        }
+
+        throw new SociableTestException("Unsupported type: %s".formatted(type.getTypeName()));
     }
 }

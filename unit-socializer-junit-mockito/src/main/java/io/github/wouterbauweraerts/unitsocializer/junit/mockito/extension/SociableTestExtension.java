@@ -1,17 +1,18 @@
 package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension;
 
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
-
+import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.unitsocializer.core.extension.BeforeEachCallbackHandler;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.JunitMockitoSociableTestInitializer;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
+import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
 /**
@@ -92,7 +93,7 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
 
         // If we are in a @Nested test class, use the enclosing (outer) instance for field processing
         Class<?> declaringClass = testClass.getDeclaringClass();
-        if (declaringClass != null) {
+        if (declaringClass != null && !hasAnnotatedField(testClass, TestSubject.class)) {
             Object outerInstance = context.getTestInstances()
                     .orElseThrow(() -> new SociableTestException("TestInstances not found!"))
                     .getEnclosingInstances().stream()
@@ -112,4 +113,8 @@ public class SociableTestExtension implements BeforeEachCallback, AfterEachCallb
     }
 
 
+    private static boolean hasAnnotatedField(Class<?> tclazzz, Class<? extends Annotation> annotation) {
+        return Arrays.stream(tclazzz.getDeclaredFields())
+                .anyMatch(field -> field.isAnnotationPresent(annotation));
+    }
 }

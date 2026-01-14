@@ -1,23 +1,34 @@
 package io.github.wouterbauweraerts.unitsocializer.core.helpers;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestInstantiationException;
 import io.github.wouterbauweraerts.unitsocializer.core.factory.MockFactory;
 import io.github.wouterbauweraerts.unitsocializer.core.factory.TypeHelper;
+import org.instancio.Instancio;
+import org.instancio.TypeToken;
+import org.instancio.TypeTokenSupplier;
+
+import static org.instancio.Select.root;
 
 
 /**
- * Helper class responsible for managing the instantiation of objects, utilizing mocks, type resolution, 
+ * Helper class responsible for managing the instantiation of objects, utilizing mocks, type resolution,
  * and test context awareness during the creation of instances.
- * 
- * <p>It works closely with {@link MockFactory} and {@link TypeHelper} to manage object instantiation 
+ *
+ * <p>It works closely with {@link MockFactory} and {@link TypeHelper} to manage object instantiation
  * and enforce dependency resolution or mocking logic.</p>
- * 
+ *
  * @author Wouter Bauweraerts
  * @since 0.0.1
  */
@@ -30,9 +41,9 @@ public class InstanceHelper {
     /**
      * Constructs an {@code InstanceHelper}.
      *
-     * @param mockFactory   the factory used to create mock objects
-     * @param typeResolver  the resolver used to determine concrete types for abstract types
-     * @param typeHelper    the helper utility for resolving constructors and constructing instances
+     * @param mockFactory  the factory used to create mock objects
+     * @param typeResolver the resolver used to determine concrete types for abstract types
+     * @param typeHelper   the helper utility for resolving constructors and constructing instances
      */
     public InstanceHelper(MockFactory mockFactory, TypeResolver typeResolver, TypeHelper typeHelper) {
         this.mockFactory = mockFactory;
@@ -52,7 +63,7 @@ public class InstanceHelper {
     /**
      * Creates an instance of the specified type.
      *
-     * <p>If the type already exists in the {@link SociableTestContext}, the existing instance is returned. 
+     * <p>If the type already exists in the {@link SociableTestContext}, the existing instance is returned.
      * Otherwise, this method creates an appropriate instance using the following logic:</p>
      * <ul>
      *     <li>If the type is a Java type, a native Java representation is created.</li>
@@ -93,19 +104,75 @@ public class InstanceHelper {
 
         Constructor<? extends T> constructor = typeHelper.getConstructor(typeToCreate);
 
-        Supplier<Object[]> paramResolver = () -> Arrays.stream(constructor.getParameterTypes())
-                .map(this::instantiate)
+        Supplier<Object[]> paramResolver = () -> Arrays.stream(constructor.getGenericParameterTypes())
+                .map(t -> switch (t) {
+                    case ParameterizedType pt -> this.instantiateGeneric(pt);
+                    case Class<?> c -> this.instantiate(c);
+                    default -> null;
+                })
                 .toArray();
 
         T instance = mockFactory.spy(typeHelper.createInstance(constructor, paramResolver));
 
         instances.putIfAbsent(type, instance);
 
-        if (!typeToCreate.getSimpleName().equals(type.getSimpleName())) {
+        if (!typeToCreate.isAssignableFrom(type)) {
             instances.putIfAbsent(typeToCreate, instance);
         }
 
         return instance;
+    }
+
+    private Object instantiateGeneric(ParameterizedType pt) {
+        SociableTestContext instances = SociableTestContext.getInstance();
+
+        Class<?> typeClass = (Class<?>) pt.getRawType();
+        Type[] typeArgs = pt.getActualTypeArguments();
+
+        if (instances.exists(typeClass)) {
+            return instances.get(typeClass);
+        }
+
+        if (typeHelper.isJavaType(typeClass) && !typeHelper.isCollection(typeClass)) {
+            return typeHelper.createJavaType(Instancio.create(() -> pt));
+        }
+
+        if (mockFactory.shouldMock(typeClass)) {
+            return instances.putIfAbsent(
+                    pt.getRawType().getClass(),
+                    mockFactory.mock(typeClass)
+            );
+        }
+
+        if (typeHelper.isCollection(typeClass)) {
+            return instantiateCollection(typeClass, typeArgs);
+        }
+
+        return null;
+    }
+
+    private Collection<?> instantiateCollection(Class<?> typeClass, Type[] typeArgs) {
+        if (typeHelper.isList(typeClass)) {
+            if (typeArgs.length > 1) {
+                throw new SociableTestInstantiationException("Cannot instantiate a List with multiple generic types");
+            }
+
+            Class<?> implementation = typeHelper.getListImplementation(typeClass);
+
+            if (typeHelper.isJavaType(typeArgs[0])) {
+                return Instancio.ofList(() -> typeArgs[0]).subtype(root(), implementation).create();
+            } else {
+                Class<?> clazz = typeHelper.getTypeClass(typeArgs[0]);
+                List<?> elements = typeResolver.resolveAll(clazz).stream()
+                        .map(this::instantiate)
+                        .toList();
+
+                List<Object> createdList = Instancio.ofList(() -> typeArgs[0]).size(0).create();
+                createdList.addAll(elements);
+                return createdList;
+            }
+        }
+        throw new SociableTestInstantiationException("Cannot instantiate a Collection of type " + typeClass.getSimpleName());
     }
 
     public void updateMockingConfig(MockingConfig config) {
