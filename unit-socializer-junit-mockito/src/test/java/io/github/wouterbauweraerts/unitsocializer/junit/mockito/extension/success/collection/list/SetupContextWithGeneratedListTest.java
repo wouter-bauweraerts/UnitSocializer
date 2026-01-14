@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SociableTest
 public class SetupContextWithGeneratedListTest {
     @Nested
-    public class ListOfJavaType {
+    class ListOfJavaType {
         @TestSubject
         DummyWithJavaTypeList subject;
 
@@ -32,7 +32,7 @@ public class SetupContextWithGeneratedListTest {
     }
 
     @Nested
-    public class ListOfJavaTypeString {
+    class ListOfJavaTypeString {
         @TestSubject
         DummyWithJavaTypeList subject;
 
@@ -50,7 +50,7 @@ public class SetupContextWithGeneratedListTest {
     }
 
     @Nested
-    public class ListOfCustomType {
+    class ListOfCustomType {
         @TestSubject
         DummyWithListOfCustomType subject;
 
@@ -61,8 +61,8 @@ public class SetupContextWithGeneratedListTest {
                     .isInstanceOf(ArrayList.class)
                     .hasSize(2)
                     .satisfies(lst -> {
-                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplOne)).isTrue();
-                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplTwo)).isTrue();
+                        assertThat(lst.stream().anyMatch(AbstractDummyImplOne.class::isInstance)).isTrue();
+                        assertThat(lst.stream().anyMatch(AbstractDummyImplTwo.class::isInstance)).isTrue();
                     });
         }
 
@@ -74,7 +74,7 @@ public class SetupContextWithGeneratedListTest {
     }
 
     @Nested
-    public class ListOfCustomGenericType {
+    class ListOfCustomGenericType {
         @TestSubject
         DummyWithListOfCustomGenericType subject;
 
@@ -85,8 +85,8 @@ public class SetupContextWithGeneratedListTest {
                     .isInstanceOf(ArrayList.class)
                     .hasSize(2)
                     .satisfies(lst -> {
-                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplOne)).isTrue();
-                        assertThat(lst.stream().anyMatch(e -> e instanceof AbstractDummyImplTwo)).isTrue();
+                        assertThat(lst.stream().anyMatch(AbstractDummyImplOne.class::isInstance)).isTrue();
+                        assertThat(lst.stream().anyMatch(AbstractDummyImplTwo.class::isInstance)).isTrue();
                     });
         }
 

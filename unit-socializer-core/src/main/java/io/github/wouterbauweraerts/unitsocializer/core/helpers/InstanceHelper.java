@@ -105,14 +105,10 @@ public class InstanceHelper {
         Constructor<? extends T> constructor = typeHelper.getConstructor(typeToCreate);
 
         Supplier<Object[]> paramResolver = () -> Arrays.stream(constructor.getGenericParameterTypes())
-                .map(t -> {
-                    if (t instanceof ParameterizedType pt) {
-                        return this.instantiateGeneric(pt);
-                    } else if (t instanceof Class<?> c) {
-                        return this.instantiate(c);
-                    } else {
-                        return null;
-                    }
+                .map(t -> switch (t) {
+                    case ParameterizedType pt -> this.instantiateGeneric(pt);
+                    case Class<?> c -> this.instantiate(c);
+                    default -> null;
                 })
                 .toArray();
 
@@ -120,7 +116,8 @@ public class InstanceHelper {
 
         instances.putIfAbsent(type, instance);
 
-        if (!typeToCreate.getSimpleName().equals(type.getSimpleName())) {
+        if (!typeToCreate.isAssignableFrom(type)) {
+//        if (!typeToCreate.getSimpleName().equals(type.getSimpleName())) {
             instances.putIfAbsent(typeToCreate, instance);
         }
 
@@ -176,7 +173,7 @@ public class InstanceHelper {
                 return createdList;
             }
         }
-        return null;
+        throw new SociableTestInstantiationException("Cannot instantiate a Collection of type " + typeClass.getSimpleName());
     }
 
     public void updateMockingConfig(MockingConfig config) {

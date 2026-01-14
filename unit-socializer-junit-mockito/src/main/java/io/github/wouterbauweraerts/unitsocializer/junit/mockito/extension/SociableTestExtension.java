@@ -2,21 +2,18 @@ package io.github.wouterbauweraerts.unitsocializer.junit.mockito.extension;
 
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.ConfigureMocking;
 import io.github.wouterbauweraerts.unitsocializer.core.annotations.TestSubject;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
-
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfig;
 import io.github.wouterbauweraerts.unitsocializer.core.config.MockingConfigReader;
 import io.github.wouterbauweraerts.unitsocializer.core.context.SociableTestContext;
 import io.github.wouterbauweraerts.unitsocializer.core.exception.SociableTestException;
 import io.github.wouterbauweraerts.unitsocializer.core.extension.BeforeEachCallbackHandler;
 import io.github.wouterbauweraerts.unitsocializer.junit.mockito.JunitMockitoSociableTestInitializer;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * JUnit extension that integrates Mockito-based sociable testing functionality.
