@@ -117,7 +117,6 @@ public class InstanceHelper {
         instances.putIfAbsent(type, instance);
 
         if (!typeToCreate.isAssignableFrom(type)) {
-//        if (!typeToCreate.getSimpleName().equals(type.getSimpleName())) {
             instances.putIfAbsent(typeToCreate, instance);
         }
 
